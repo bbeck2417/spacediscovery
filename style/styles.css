@@ -100,3 +100,6 @@ header {
     align-items: center;
     height: 80vh;
 }
+section[id="previous-articles"] {
+   scroll-margin-top: 90.5px;
+}
