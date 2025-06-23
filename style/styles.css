@@ -1,13 +1,102 @@
 body {
     background-color: rgba(10, 0, 28, 0.8);
     color: white;
-
+    font-family: Orbitron, sans-serif;
+   font-size: 16px;
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    opacity: 1;
+    overflow: hidden;
+    background-color: rgb(10, 0, 28);
+    border-radius: 8px;;
 }
 
+.navlinks {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
 .navlinks a {
     list-style: none;
     color: white;
 }
 .navlinks li {
     list-style: none;
+}
+#main-nav {
+    display: flex;
+    padding: 10px 20px;
+    
+}
+#main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+   
+}
+#main-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+}
+#main-nav a.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+}
+#main-nav img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+#hero {
+    display: inline-flexbox;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    padding-top: 30vh;
+}
+#hero h1 {
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+#hero img {
+    width: 80vw;
+    height: 80vh;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+#welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+#recent-discoveries {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+#previous-articles {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+#join {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
 }
