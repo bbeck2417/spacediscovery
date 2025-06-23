@@ -8,3 +8,6 @@ body {
     list-style: none;
     color: white;
 }
+.navlinks li {
+    list-style: none;
+}
