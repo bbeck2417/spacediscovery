@@ -4,12 +4,7 @@ body {
 
 }
 
-li a {
-    text-decoration: none;
-    transition: all .2s ease-in-out;
-}
-
-li a:hover {
+.navlinks {
+    list-style: none;
     color: white;
-    transform: scale(1.4);
 }
