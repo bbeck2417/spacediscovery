@@ -1,8 +1,18 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%; /* Ensures html and body fill the viewport */
+    /* overflow-x: hidden; /* Optional: Prevents horizontal scrollbar if 100vw causes it */
+}
 body {
-    background-color: rgba(10, 0, 28, 0.8);
+    background-color: rgb(10, 0, 28);
     color: white;
     font-family: Orbitron, sans-serif;
    font-size: 16px;
+   font-weight: 500;
+   letter-spacing: 0.5px; ;
+    
+   min-height: 100vh;
 }
 header {
     position: fixed;
@@ -51,42 +61,88 @@ header {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
 }
-#main-nav img {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
+
 #hero {
-    display: inline-flexbox;
-    justify-content: center;
-    height: 100vh;
-    text-align: center;
-    padding-top: 30vh;
+    position: relative; /* This is crucial for .hero-image-container's absolute positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* This pushes the last item (your image container) to the bottom of the flex container.
+       This will make the image visually sit at the bottom of the 100vh #hero section. */
+    justify-content: space-between; /* Distributes space, pushing first item to top, last to bottom */
+
+    height: 100vh; /* Ensures the section takes up the full viewport height */
+    text-align: center; /* Keeps your H1 and P from being right at the top edge */
+    padding-bottom: 0; /* Ensure no unwanted padding at the bottom of the hero section */
 }
 #hero h1 {
-    justify-content: center;
-    align-items: center;
-    font-size: 3em;
-    margin-bottom: 20px;
+    margin-top: 30vh;
+    /* Ensure text color is visible against the background */
+    color: white;
+    font-size: 4em; /* Adjust font size as desired */
+    margin-bottom: 20px; /* Space below the heading */
+    position: relative; /* Needed for z-index or other positioning if you add more layers */
+    z-index: 10; /* Ensures it's above the Earth image if they overlap */
+
+    /* --- Animation Properties --- */
+    /* This links the element to the keyframe animation */
+    /* zoomInLoad: name of our @keyframes animation */
+    /* 1.5s: duration of the animation (1.5 seconds) */
+    /* ease-out: timing function (starts fast, slows down at end) */
+    /* forwards: crucial - element retains the styles from its 100% state after animation finishes */
+    animation: zoomInLoad 1.5s ease-out forwards;
+
+    /* Initial state before animation starts (optional, but good practice) */
+    opacity: 0;
+    transform: scale(0.1); /* Start at half its size */
 }
-#hero img {
-    width: 80vw;
-    height: 80vh;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+.hero-image-container {
+    position: absolute; /* Keeps it out of flex flow, allowing precise placement */
+    bottom: 0; /* Sticks to the bottom edge of its relative parent (#hero) */
+    left: 0; /* Aligns to the left edge */
+    width: 100vw; /* Spans full viewport width */
+    overflow: hidden; /* Clips the image as desired */
+
+    /* IMPORTANT: Re-adjust this height. It needs to be the pixel height that
+       represents the *top half* of your image when it's scaled to 100vw.
+       You'll need to visually fine-tune this value.
+       Example: If your image becomes 400px tall at 100vw, set this to 200px. */
+    height: 200px; /* <--- ADJUST THIS VALUE! */
+    z-index: 1; /* Ensures it's above other elements but below your fixed header */
+
+    /* Remove display:flex and justify-content:center from here,
+       as the image itself should now fill this container with 100% width. */
+    display: block; /* Ensures it behaves like a block element */
+    margin-top: 0; /* Remove previous margin-top */
+}
+/* Style for the actual image inside the container */
+.hero-image {
+    display: block;
+    width: 100%; /* Make the image fill the container's width (100vw) */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensures the image covers the container, cropping if necessary */
+    object-position: top; /* Makes sure the top of the image is what's displayed */
 }
 #welcome {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
+   
+}
+#welcome h1 {
+    font-size: 2em;
+    margin-top: 10vh;
 }
 #recent-discoveries {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 100vh;
+}
+#recent-discoveries h2 {
+    font-size: 2em;
+    margin-top: 10vh;
 }
 #previous-articles {
     display: flex;
@@ -102,4 +158,16 @@ header {
 }
 section[id="previous-articles"] {
    scroll-margin-top: 90.5px;
+}
+/* --- Keyframe Animation Definition --- */
+/* This defines what happens at different points in the animation */
+@keyframes zoomInLoad {
+    0% {
+        opacity: 0;           /* Start completely transparent */
+        transform: scale(0.1); /* Start at half size */
+    }
+    100% {
+        opacity: 1;           /* End fully opaque */
+        transform: scale(1);  /* End at original size */
+    }
 }

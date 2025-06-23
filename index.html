@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Space Discoveries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style/styles.css">
+    
 </head>
 
 <body>
+    <canvas id="starfield-canvas"></canvas>
     <header>
         <nav id="main-nav">
             <ul class="navlinks">
@@ -20,7 +25,10 @@
     <section id="hero">
         <h1>Space Discoveries</h1>
         <p>Explore the universe with us!</p>
-        <img src="./images/earth.drawio.png" alt="Earth from Space" class="hero-image">
+        <div class="hero-image-container">
+            <img class="hero-image" src="./images/earthtransparent.drawio.png" alt="Earth from Space" class="hero-image">
+        </div>
+        
     </section>
     <section id="welcome">
         <h1>Welcome to Space Discoveries!</h1>
@@ -53,7 +61,7 @@
     </section>
         
 
-
+<script src="./js/script.js"></script>
 </body>
 
 </html>
