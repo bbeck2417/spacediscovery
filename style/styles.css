@@ -3,3 +3,13 @@ body {
     color: white;
 
 }
+
+nav a {
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+
+nave a:hover {
+    color: white;
+    transform: scale(1.4);
+}
