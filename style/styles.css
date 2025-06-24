@@ -1,173 +1,308 @@
+/* ==================================================================== */
+/* BASE STYLES (MOBILE-FIRST)                      */
+/* These are the default styles that apply to all screen sizes,
+   but are specifically tailored for smaller (mobile) screens.
+   Larger screen styles will override these in the media query below. */
+/* ==================================================================== */
+html {
+    scroll-behavior: smooth; /* Optional: for smooth scrolling, if you want it */
+    scroll-padding-top: 117.5px; /* This is crucial for *all* hash links */
+}
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%; /* Ensures html and body fill the viewport */
-    /* overflow-x: hidden; /* Optional: Prevents horizontal scrollbar if 100vw causes it */
+    /* Ensure html and body fill the viewport vertically.
+       min-height 100% on html, and then min-height: 100vh on body is a good combo. */
+    min-height: 100%;
+    height: auto; /* Allow height to adjust to content */
+    overflow-x: hidden; /* Prevents horizontal scrollbar if 100vw causes it */
 }
 body {
     background-color: rgb(10, 0, 28);
     color: white;
     font-family: Orbitron, sans-serif;
-   font-size: 16px;
-   font-weight: 500;
-   letter-spacing: 0.5px; ;
-    
-   min-height: 100vh;
+    font-size: 16px; /* Good base font size for mobile */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.6; /* Improve readability */
+    padding-top: 60px; /* Add padding to account for fixed header on mobile */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
 }
+
+/* HEADER & NAVIGATION (Mobile-First) */
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    opacity: 1;
-    overflow: hidden;
     background-color: rgb(10, 0, 28);
-    border-radius: 8px;;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#main-nav {
+    display: flex;
+    justify-content: flex-end; /* Push hamburger to the right */
+    align-items: center; /* Vertically center hamburger */
+    padding: 10px 20px;
+    height: 40px; /* Consistent height for the header bar */
+}
+
+.hamburger { /* Assuming you added this to HTML */
+    display: block; /* Show on mobile */
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
 }
 
 .navlinks {
-    display: flex;
-    justify-content: right;
-    align-items: center;
+    display: none; /* Hidden by default on mobile */
+    position: absolute; /* Takes it out of the flow */
+    top: 60px; /* Position just below the header */
+    left: 0;
     width: 100%;
-    padding: 10px 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
+    background-color: rgb(10, 0, 28);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+    z-index: 999;
+
+    flex-direction: column;
+    padding: 20px 0;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
 }
-.navlinks a {
-    list-style: none;
-    color: white;
+
+.navlinks.active {
+    display: flex;
 }
+
 .navlinks li {
     list-style: none;
+    text-align: center;
+    width: 100%;
 }
-#main-nav {
-    display: flex;
-    padding: 10px 20px;
-    
-}
-#main-nav a {
+.navlinks a {
+    display: block;
+    padding: 15px 0;
     color: white;
     text-decoration: none;
-    padding: 10px;
-   
+    transition: background-color 0.3s ease;
 }
-#main-nav a:hover {
+.navlinks a:hover,
+.navlinks a.active {
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-}
-#main-nav a.active {
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
+    border-radius: 0;
 }
 
+/* HERO SECTION (Mobile-First) */
 #hero {
-    position: relative; /* This is crucial for .hero-image-container's absolute positioning */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* This pushes the last item (your image container) to the bottom of the flex container.
-       This will make the image visually sit at the bottom of the 100vh #hero section. */
-    justify-content: space-between; /* Distributes space, pushing first item to top, last to bottom */
-
-    height: 100vh; /* Ensures the section takes up the full viewport height */
-    text-align: center; /* Keeps your H1 and P from being right at the top edge */
-    padding-bottom: 0; /* Ensure no unwanted padding at the bottom of the hero section */
+    justify-content: center; /* Center content vertically for mobile */
+    height: 100vh; /* Keep 100vh for hero on mobile too if desired */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
+
 #hero h1 {
-    margin-top: 30vh;
-    /* Ensure text color is visible against the background */
+    margin-top: 0; /* No fixed margin-top for mobile - centered by flex */
+    font-size: 2.5em; /* Smaller for mobile */
     color: white;
-    font-size: 4em; /* Adjust font size as desired */
-    margin-bottom: 20px; /* Space below the heading */
-    position: relative; /* Needed for z-index or other positioning if you add more layers */
-    z-index: 10; /* Ensures it's above the Earth image if they overlap */
-
-    /* --- Animation Properties --- */
-    /* This links the element to the keyframe animation */
-    /* zoomInLoad: name of our @keyframes animation */
-    /* 1.5s: duration of the animation (1.5 seconds) */
-    /* ease-out: timing function (starts fast, slows down at end) */
-    /* forwards: crucial - element retains the styles from its 100% state after animation finishes */
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 10;
     animation: zoomInLoad 1.5s ease-out forwards;
-
-    /* Initial state before animation starts (optional, but good practice) */
     opacity: 0;
-    transform: scale(0.1); /* Start at half its size */
+    transform: scale(0.1);
 }
+#hero p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+}
+
 .hero-image-container {
-    position: absolute; /* Keeps it out of flex flow, allowing precise placement */
-    bottom: 0; /* Sticks to the bottom edge of its relative parent (#hero) */
-    left: 0; /* Aligns to the left edge */
-    width: 100vw; /* Spans full viewport width */
-    overflow: hidden; /* Clips the image as desired */
-
-    /* IMPORTANT: Re-adjust this height. It needs to be the pixel height that
-       represents the *top half* of your image when it's scaled to 100vw.
-       You'll need to visually fine-tune this value.
-       Example: If your image becomes 400px tall at 100vw, set this to 200px. */
-    height: 200px; /* <--- ADJUST THIS VALUE! */
-    z-index: 1; /* Ensures it's above other elements but below your fixed header */
-
-    /* Remove display:flex and justify-content:center from here,
-       as the image itself should now fill this container with 100% width. */
-    display: block; /* Ensures it behaves like a block element */
-    margin-top: 0; /* Remove previous margin-top */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40vw; /* Responsive height for mobile image */
+    overflow: hidden;
+    z-index: 1;
 }
-/* Style for the actual image inside the container */
+
 .hero-image {
     display: block;
-    width: 100%; /* Make the image fill the container's width (100vw) */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: cover; /* Ensures the image covers the container, cropping if necessary */
-    object-position: top; /* Makes sure the top of the image is what's displayed */
+    width: 100%;
+    height: 100%; /* Image fills container's height */
+    object-fit: cover;
+    object-position: top;
 }
-#welcome {
+
+/* CONTENT SECTIONS (Mobile-First) */
+section {
+    padding: 60px 20px; /* Padding for mobile sections */
+    min-height: 50vh; /* Allow content sections to be shorter on mobile */
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100vh;
-   
+    text-align: center;
+    justify-content: center;
+    box-sizing: content-box;
 }
-#welcome h1 {
-    font-size: 2em;
-    margin-top: 10vh;
+
+section h1, section h2 {
+    font-size: 2em; /* Smaller headings for mobile */
+    margin-bottom: 20px;
 }
-#recent-discoveries {
+section p {
+    max-width: 600px;
+    margin-bottom: 15px;
+}
+section ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+section li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+/* JOIN SECTION (Mobile-First) */
+#join form {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 100vh;
+    width: 90%;
+    max-width: 400px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
 }
-#recent-discoveries h2 {
-    font-size: 2em;
-    margin-top: 10vh;
+
+#join label {
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    text-align: left;
 }
-#previous-articles {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
+
+#join input[type="text"],
+#join input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    background-color: #333;
+    color: white;
+    border-radius: 5px;
+    font-size: 1em;
 }
-#join {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 80vh;
+
+#join button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
 }
-section[id="previous-articles"] {
-   scroll-margin-top: 90.5px;
+
+#join button:hover {
+    background-color: #0056b3;
 }
-/* --- Keyframe Animation Definition --- */
-/* This defines what happens at different points in the animation */
+
+/* Ensure scroll-margin-top is correct */
+
+
+/* Animations (remain the same) */
 @keyframes zoomInLoad {
     0% {
-        opacity: 0;           /* Start completely transparent */
-        transform: scale(0.1); /* Start at half size */
+        opacity: 0;
+        transform: scale(0.1);
     }
     100% {
-        opacity: 1;           /* End fully opaque */
-        transform: scale(1);  /* End at original size */
+        opacity: 1;
+        transform: scale(1);
     }
+}
+
+/* ==================================================================== */
+/* DESKTOP STYLES (MEDIA QUERIES)        */
+/* These styles override the mobile-first styles for screens 768px and wider. */
+/* ==================================================================== */
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 0; /* No need for padding-top if header is not fixed or content sits below it naturally */
+    }
+
+    /* HEADER & NAVIGATION (Desktop Overrides) */
+    #main-nav {
+        justify-content: flex-end; /* Push navlinks to the right */
+        height: auto; /* Allow height to adapt to content */
+    }
+
+    .hamburger {
+        display: none; /* Hide hamburger on desktop */
+    }
+
+    .navlinks {
+        position: static; /* Bring it back to normal flow for desktop */
+        display: flex; /* Always visible on desktop */
+        flex-direction: row; /* Horizontal links */
+        width: auto; /* Let content determine width */
+        background-color: rgba(0, 0, 0, 0.5); /* Original desktop nav background */
+        box-shadow: none; /* No overlay shadow */
+        z-index: auto;
+        padding: 10px 0; /* Desktop padding */
+        max-height: none; /* Remove height constraints */
+        overflow-y: visible; /* No scrollbar */
+        border-radius: 8px; /* Original desktop border-radius */
+    }
+    .navlinks a {
+        padding: 10px 15px; /* Desktop padding for links */
+        border-radius: 8px; /* Desktop border-radius for links */
+        display: inline-block; /* Allow spacing between links */
+    }
+
+    /* HERO SECTION (Desktop Overrides) */
+    #hero {
+        justify-content: space-between; /* Restore original vertical alignment */
+        padding-bottom: 0; /* Remove bottom padding if image sits at bottom */
+    }
+
+    #hero h1 {
+        margin-top: 30vh; /* Restore original desktop margin-top */
+        font-size: 4em; /* Restore original larger font size for desktop */
+        margin-bottom: 20px;
+    }
+
+    .hero-image-container {
+        height: 200px; /* Restore original fixed pixel height for desktop */
+                       /* IMPORTANT: Adjust this if your Earth image needs more vertical space on desktop */
+    }
+
+    /* CONTENT SECTIONS (Desktop Overrides) */
+    section {
+        padding: 80px 40px; /* More padding for desktop */
+        min-height: 100vh; /* Restore full viewport height for sections on desktop */
+    }
+
+    section h1, section h2 {
+        font-size: 3em; /* Larger headings for desktop */
+    }
+
+    /* JOIN SECTION (Desktop Overrides - Add if specific width/layout needed) */
+    #join form {
+        width: 60%; /* Example: Make form wider on desktop */
+        max-width: 600px; /* Example: Adjust max width */
+    }
+    /* You might add flex-direction: row and align-items for labels/inputs here
+       if you had a side-by-side layout for desktop inputs. */
 }
