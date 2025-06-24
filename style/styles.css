@@ -126,7 +126,7 @@ header {
 
 .hero-image-container {
     position: absolute;
-    bottom: 0;
+    bottom: 15vh;
     left: 0;
     width: 100%;
     height: 50vw; /* Responsive height for mobile image */
