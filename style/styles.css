@@ -120,7 +120,7 @@ header {
     transform: scale(0.1);
 }
 #hero p {
-    font-size: 1.1em;
+    font-size: 1.5em;
     margin-bottom: 20px;
 }
 
@@ -129,9 +129,10 @@ header {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40vw; /* Responsive height for mobile image */
-    overflow: hidden;
+    height: 50vw; /* Responsive height for mobile image */
+    
     z-index: 1;
+    
 }
 
 .hero-image {
@@ -140,6 +141,7 @@ header {
     height: 100%; /* Image fills container's height */
     object-fit: cover;
     object-position: top;
+    overflow-y: visible; /* Allow image to overflow if needed */
 }
 
 /* CONTENT SECTIONS (Mobile-First) */
@@ -217,7 +219,7 @@ section li {
     background-color: #0056b3;
 }
 
-/* Ensure scroll-margin-top is correct */
+
 
 
 /* Animations (remain the same) */
@@ -294,8 +296,15 @@ section li {
         min-height: 100vh; /* Restore full viewport height for sections on desktop */
     }
 
-    section h1, section h2 {
+    section h1 {
+        font-size: 3.5em;
+    }
+    
+    section h2 {
         font-size: 3em; /* Larger headings for desktop */
+    }
+    section p, section li {
+        font-size: 1.5em;
     }
 
     /* JOIN SECTION (Desktop Overrides - Add if specific width/layout needed) */
