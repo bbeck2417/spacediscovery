@@ -60,10 +60,10 @@ header {
 .navlinks {
     display: none; /* Hidden by default on mobile */
     position: absolute; /* Takes it out of the flow */
-    top: 60px; /* Position just below the header */
+    top: 40px; /* Position just below the header */
     left: 0; /* Align to the left */
     width: 100%; /* Full width for mobile */
-    background-color: rgb(10, 0, 28); /* Dark background for contrast */
+    background-color: rgba(10, 0, 28, .8); /* Dark background for contrast */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* Shadow for depth */
     z-index: 999; /* Ensure it sits above other content */
 
@@ -266,7 +266,7 @@ section li {
         display: flex; /* Always visible on desktop */
         flex-direction: row; /* Horizontal links */
         width: auto; /* Let content determine width */
-        background-color: rgba(0, 0, 0, 0.5); /* Original desktop nav background */
+        background-color: rgba(10, 0, 28, .8); /* Original desktop nav background */
         box-shadow: none; /* No overlay shadow */
         z-index: auto; /* Reset z-index for normal flow */
         padding: 10px 0; /* Desktop padding */
