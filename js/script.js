@@ -1,22 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const canvas = document.getElementById('starfield-canvas');
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-    const stars = [];
+    const canvas = document.getElementById('starfield-canvas'); // Get the canvas element for the starfield
+    const ctx = canvas.getContext('2d'); // Get the 2D rendering context for the canvas
+    let width = window.innerWidth; // Get the initial width of the window
+    let height = window.innerHeight; // Get the initial height of the window
+    const stars = []; // Array to hold star objects
     const numStars = 200; // Number of stars
     const starSpeed = 0.5; // Speed of movement (adjust as needed)
 
     // Max Z-depth for initial distribution and when stars reset
     const maxZ = 1000; // Determines how "deep" the starfield is
     // Factor for perspective calculation - impacts how stars scale with depth
-    const perspectiveFactor = 250; // Adjust for more/less pronounced perspective effect
+    const perspectiveFactor = 300; // Adjust for more/less pronounced perspective effect
 
-    canvas.width = width;
-    canvas.height = height;
+    canvas.width = width; // Set the canvas width to the window width
+    canvas.height = height; // Set the canvas height to the window height
+    // Style the canvas to cover the entire viewport
     canvas.style.position = 'fixed'; // Keep fixed to cover viewport
-    canvas.style.top = '0';
-    canvas.style.left = '0';
+    canvas.style.top = '0'; // Position at the top of the viewport
+    canvas.style.left = '0'; // Position at the left of the viewport
     canvas.style.zIndex = '-1'; // Place behind all content
     canvas.style.pointerEvents = 'none'; // Ensure it doesn't block clicks/interactions
 
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
         this.x = (Math.random() - 0.5) * width;
         this.y = (Math.random() - 0.5) * height;
         this.z = Math.random() * maxZ; // Initial random depth within the maxZ range
-        this.size = Math.random() * 2 + 0.5; // Min size to ensure visibility even when far
+        this.size = Math.random() * 4 + 2; // Min size to ensure visibility even when far
     }
 
     // Function to initialize all stars for the first time
@@ -35,6 +36,31 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < numStars; i++) {
             stars.push(new Star());
         }
+    }
+
+    // --- Helper function to draw a star shape ---
+    function drawStar(context, cx, cy, spikes, outerRadius, innerRadius) {
+        let rot = Math.PI / 2 * 3;
+        let x = cx;
+        let y = cy;
+        let step = Math.PI / spikes;
+
+        context.beginPath();
+        context.moveTo(cx, cy - outerRadius);
+        for (let i = 0; i < spikes; i++) {
+            x = cx + Math.cos(rot) * outerRadius;
+            y = cy + Math.sin(rot) * outerRadius;
+            context.lineTo(x, y);
+            rot += step;
+
+            x = cx + Math.cos(rot) * innerRadius;
+            y = cy + Math.sin(rot) * innerRadius;
+            context.lineTo(x, y);
+            rot += step;
+        }
+        context.lineTo(cx, cy - outerRadius);
+        context.closePath();
+        context.fill();
     }
 
     // Animation loop
@@ -49,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
             if (star.z < 1) { // If z is very small or negative (past camera)
                 star.z = maxZ; // Reset to the maximum distance (far end)
                 // Re-randomize x and y to appear from a new point across the field
-                star.x = (Math.random() - 0.5) * width;
-                star.y = (Math.random() - 0.5) * height;
-                star.size = Math.random() * 2 + 0.5; // Reset size too
+                star.x = (Math.random() * 2 - 0.5) * width;     
+                star.y = (Math.random() * 2 - 0.5) * height; 
+                star.size = Math.random() * 4 + 2; // Reset size too
             }
 
             // Perspective calculation: 'k' determines scaling based on depth (z)
@@ -59,15 +85,20 @@ document.addEventListener('DOMContentLoaded', function() {
             const k = perspectiveFactor / star.z;
 
             // Calculate screen coordinates (sx, sy) centered on the canvas
-            const sx = star.x * k + width / 2;
+            const sx = star.x * k + width / 2; 
             const sy = star.y * k + height / 2;
             const size = star.size * k; // Scaled size of the star
 
             // Only draw the star if it's within the canvas bounds and is still visible
             if (sx > -size && sx < width + size && sy > -size && sy < height + size && size > 0.1) {
-                ctx.beginPath();
-                ctx.arc(sx, sy, size, 0, Math.PI * 2); // Draw a circle for the star
-                ctx.fill();
+                // --- Replaced ctx.arc with drawStar ---
+                const numSpikes = 5; // Number of points on the star (e.g., 5 for a classic star)
+                const outerRadius = size;
+                // Inner radius controls how "pointy" the star is.
+                // A smaller innerRadius makes the points sharper.
+                // A common ratio is 0.5, but you can experiment.
+                const innerRadius = size * 0.1; 
+                drawStar(ctx, sx, sy, numSpikes, outerRadius, innerRadius);
             }
         });
 
