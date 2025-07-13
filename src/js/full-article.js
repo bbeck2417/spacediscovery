@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             `;
             const backButton = document.getElementById('back-button');
             backButton.addEventListener('click', (event) => {
-                history.back();
+                window.location.href = './index.html/#articles';
             });
         } else {
             fullArticleContent.innerHTML = '<p>Article not found. Please go back to the <a href="index.html">main page</a>.</p>';

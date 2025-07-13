@@ -362,6 +362,9 @@ section li {
     margin-bottom: 15px;
 }
 .full-article-container button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: rgb(0, 86, 179);
     color: white;
     padding: 10px 15px;
