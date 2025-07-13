@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             card.addEventListener('click', () => {
                 // Open the full article in a new page
-                window.open(`/spacediscovery/src/articles/article.html?id=${article.id}`, '_blank');
+                window.open(`/spacediscovery/src/articles/index.html?id=${article.id}`, '_blank');
             });
 
             newsContainer.appendChild(card);
