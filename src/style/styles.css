@@ -372,7 +372,13 @@ section li {
     font-size: 1em;
     transition: background-color 0.3s ease;
 } */
+
 .articleBackButton {
+    display: flex;
+    justify-content: center; /* Center the button */
+    margin-top: 20px; /* Space above the button */
+}
+.articleBackButton button {
     background-color: rgb(0, 86, 179);
     color: white;
     padding: 10px 15px;
@@ -381,7 +387,7 @@ section li {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    display: inline-block; /* Ensure it behaves like a button */
+    
 }
 /* ==================================================================== */
 /* DESKTOP STYLES (MEDIA QUERIES)        */
