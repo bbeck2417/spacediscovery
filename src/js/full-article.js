@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const fullArticleContent = document.getElementById('full-article-content');
     const articleTitleTag = document.getElementById('article-title-tag');
-    const backButton = document.getElementById('back-button');
+    // Removed the initial 'backButton' constant here as it refers to a button that will be replaced.
 
-    // Get the article ID from the URL query parameter
     const urlParams = new URLSearchParams(window.location.search);
     const articleId = urlParams.get('id');
 
@@ -28,12 +27,18 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <span class="author-date">By ${article.author} on ${new Date(article.datePublished).toLocaleDateString()}</span>
                 <img src="${article.image}" alt="${article.title}">
                 <p>${article.content}</p>
-                <button id="back-button"><a href="index.html" id="back-button">Back to News</a></button>
-            `;
-            const backButton = document.getElementById('back-button');
-            backButton.addEventListener('click', (event) => {
-                window.location.href = '/spacedicovery/index.html/#news-container';
-            });
+                <button id="back-to-news-button">Back to Articles</button> `;
+
+            // *** IMPORTANT: Get a reference to the NEWLY CREATED button and attach the listener ***
+            const backButton = document.getElementById('back-to-news-button');
+            if (backButton) { // Ensure the button exists before trying to add a listener
+                backButton.addEventListener('click', () => {
+                    // Navigate to the main page and scroll to the news-container section
+                    history.back();
+                    // Alternatively, you can use:  window.location.href = '/spacediscovery/index.html/#news-container';
+                });
+            }
+
         } else {
             fullArticleContent.innerHTML = '<p>Article not found. Please go back to the <a href="index.html">main page</a>.</p>';
             articleTitleTag.textContent = 'Article Not Found';
@@ -43,5 +48,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         fullArticleContent.innerHTML = '<p>Error loading article. Please try again later.</p>';
         articleTitleTag.textContent = 'Error Loading Article';
     }
-
 });
