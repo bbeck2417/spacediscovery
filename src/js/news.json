@@ -2,7 +2,7 @@
 [
   {
     "id": "1",
-    "image":"spacediscovery/src/images/exoplanet.jpg",
+    "image":"/spacediscovery/src/images/exoplanet.jpg",
     "author": "Dr. Aris Thorne",
     "title": "Breakthrough! 'Oceanus' Exoplanet Found Teeming with Water in Habitable Zone 💧",
     "datePublished": "2025-07-10T10:00:00Z",
