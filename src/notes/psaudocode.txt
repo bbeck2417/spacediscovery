@@ -1,0 +1,10 @@
+
+Article Database Schema
+    ID
+    Title
+    Publish Date
+    Author
+    Content
+    CoverImage
+
+    

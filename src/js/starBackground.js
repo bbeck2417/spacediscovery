@@ -182,24 +182,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Call the function once on page load to set the initial state
         // (important if the page is loaded while already scrolled down)
         animateEarthOnScroll();
-    }
-    // --- Hamburger Menu Logic ---
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.navlinks');
-
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Optional: Close menu when a link is clicked (for single-page sites)
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                // Check if the menu is active before trying to remove the class
-                if (navLinks.classList.contains('active')) {
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-    }
-});
+    }});
