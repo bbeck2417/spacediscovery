@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <span class="author-date">By ${article.author} on ${new Date(article.datePublished).toLocaleDateString()}</span>
                 <img src="${article.image}" alt="${article.title}">
                 <p>${article.content}</p>
-                <button id="back-to-news-button">Back to Articles</button> `;
+                <div class="articleBackButton"><button id="back-to-news-button">Back to Articles</button></div> `;
 
             // *** IMPORTANT: Get a reference to the NEWLY CREATED button and attach the listener ***
             const backButton = document.getElementById('back-to-news-button');
