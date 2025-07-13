@@ -379,6 +379,55 @@ section li {
     transition: background-color 0.3s ease;
     
 }
+/* ==================================================================== */
+/* FOOTER STYLES */
+/* ==================================================================== */
+footer {
+    background-color: rgb(10, 0, 28); /* Dark background matching your header/body */
+    color: white;
+    padding: 30px 20px; /* Generous padding top/bottom, 20px side padding */
+    text-align: center; /* Center text by default */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
+    display: flex; /* Use flexbox for main footer content */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the footer */
+    gap: 15px; /* Space between flex items (p, div.footer-social-links) */
+}
+
+footer p {
+    margin: 0; /* Remove default paragraph margins to control spacing with gap */
+    font-size: 0.9em; /* Slightly smaller font for copyright */
+    line-height: 1.5;
+}
+
+.footer-social-links {
+    display: flex; /* Make this container a flex container */
+    flex-wrap: wrap; /* Allow links to wrap to the next line on smaller screens */
+    justify-content: center; /* Center the links horizontally */
+    align-items: center; /* Vertically align items */
+    gap: 15px; /* Space between links */
+    margin-top: 10px; /* Add some space above the social links section */
+}
+
+.footer-social-links p {
+    font-size: 1em; /* Adjust font size for the "Follow" text */
+    margin-right: 10px; /* Space between "Follow" text and the first link */
+    white-space: nowrap; /* Prevent "Follow my favorite channels:" from wrapping */
+}
+
+.footer-social-links a {
+    color: rgb(0, 153, 255); /* A lighter blue for links for better visibility */
+    text-decoration: none; /* Remove underline */
+    font-size: 0.95em; /* Slightly adjust link font size */
+    transition: color 0.3s ease; /* Smooth hover effect */
+    padding: 5px 8px; /* Add some padding to make links easier to click */
+    border-radius: 4px; /* Slightly rounded corners for links */
+}
+
+.footer-social-links a:hover {
+    color: rgb(77, 195, 255); /* Lighter blue on hover */
+    text-decoration: underline; /* Add underline on hover for clarity */
+}
 
 /* ==================================================================== */
 /* DESKTOP STYLES (MEDIA QUERIES)        */
