@@ -379,6 +379,7 @@ section li {
     transition: background-color 0.3s ease;
     
 }
+
 /* ==================================================================== */
 /* DESKTOP STYLES (MEDIA QUERIES)        */
 /* These styles override the mobile-first styles for screens 768px and wider. */
@@ -434,6 +435,7 @@ section li {
         height: 300px; /* Restore original fixed pixel height for desktop */
                        /* IMPORTANT: Adjust this if your Earth image needs more vertical space on desktop */
     }
+    
 
     /* CONTENT SECTIONS (Desktop Overrides) */
     section {
@@ -457,5 +459,17 @@ section li {
         width: 60%; /* Example: Make form wider on desktop */
         max-width: 600px; /* Example: Adjust max width */
     }
+    /* Media Query for larger screens (adjust as needed) */
+ 
+    footer {
+        flex-direction: row; /* On desktop, arrange items horizontally */
+        justify-content: space-between; /* Space out copyright and social links */
+        padding: 30px 40px; /* More padding for desktop */
+    }
+
+    .footer-social-links {
+        margin-top: 0; /* No top margin needed when horizontal */
+    }
+
     
 }
