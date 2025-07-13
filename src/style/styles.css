@@ -1,0 +1,454 @@
+/* ==================================================================== */
+/* BASE STYLES (MOBILE-FIRST)                      */
+/* These are the default styles that apply to all screen sizes,
+   but are specifically tailored for smaller (mobile) screens.
+   Larger screen styles will override these in the media query below. */
+/* ==================================================================== */
+html {
+    scroll-behavior: smooth; /* Optional: for smooth scrolling, if you want it */
+    scroll-padding-top: 117.5px; /* This is crucial for *all* hash links */
+}
+html, body {
+    margin: 0;
+    padding: 0;
+    /* Ensure html and body fill the viewport vertically.
+       min-height 100% on html, and then min-height: 100vh on body is a good combo. */
+    min-height: 100%;
+    height: auto; /* Allow height to adjust to content */
+    overflow-x: hidden; /* Prevents horizontal scrollbar if 100vw causes it */
+}
+body {
+    background-color: rgb(10, 0, 28);
+    color: white;
+    font-family: Orbitron, sans-serif;
+    font-size: 16px; /* Good base font size for mobile */
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.6; /* Improve readability */
+    padding-top: 60px; /* Add padding to account for fixed header on mobile */
+    min-height: 100vh; /* Ensure body takes at least full viewport height */
+}
+
+/* HEADER & NAVIGATION (Mobile-First) */
+header {
+    position: fixed; /* Fixed header for mobile */
+    top: 0; /* Stick to the top */
+    left: 0; /* Stick to the left */
+    width: 100%; /* Full width */
+    z-index: 1000; /* Ensure it sits above other content */
+    background-color: rgb(10, 0, 28); /* Dark background for contrast */ 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);  /* Subtle shadow for depth */
+}
+
+#main-nav {
+    display: flex;  /* Flexbox for layout */
+    justify-content: flex-end; /* Push hamburger to the right */
+    align-items: center; /* Vertically center hamburger */
+    padding: 10px 20px; /* Padding for the header */
+    height: 40px; /* Consistent height for the header bar */
+}
+
+#logo, a {
+    display: flex;
+    margin: 10px auto 0px 10px;
+    text-decoration: none;
+    color: white; /* White text for contrast */
+
+}
+.material-symbols-outlined {
+    display: flex;
+    margin-right: auto;
+    margin-top: 10px;
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Apply the animation to the specific recycling icon */
+#logo .material-symbols-outlined {
+    animation: rotate 5s linear infinite; /* 2s duration, linear speed, infinite loop */
+    display: inline-block; /* Essential for transform to work correctly */
+}
+
+.hamburger { /* Assuming you added this to HTML */
+    display: block; /* Show on mobile */
+    font-size: 30px; /* Larger icon for easier tapping */
+    color: white; /* White color for contrast */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    z-index: 1001; /* Ensure it sits above navlinks */
+    padding: 5px; /* Padding for better tap area */
+}
+
+.navlinks {
+    display: none; /* Hidden by default on mobile */
+    position: absolute; /* Takes it out of the flow */
+    top: 40px; /* Position just below the header */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width for mobile */
+    background-color: rgba(10, 0, 28, .8); /* Dark background for contrast */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* Shadow for depth */
+    z-index: 999; /* Ensure it sits above other content */
+
+    flex-direction: column; /* Stack links vertically */
+    padding: 20px 0; /* Padding for links */
+    max-height: calc(100vh - 60px); /* Full height minus header */
+    overflow-y: auto; /* Scrollable if content exceeds viewport height, possible for landscape on some devices */
+}
+
+.navlinks.active {
+    display: flex; /* Show navlinks when active */
+}
+
+.navlinks li {
+    list-style: none; /* Remove default list styles */
+    text-align: center; /* Center align links */
+    width: 100%; /* Full width for each link */
+}
+.navlinks a {
+    display: block; /* Block display for full width */
+    padding: 15px 0; /* Padding for links */
+    color: white; /* White text for contrast */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+.navlinks a:hover,
+.navlinks a.active {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover or active link */
+    border-radius: 0; /* No border-radius for mobile links */
+}
+
+/* HERO SECTION (Mobile-First) */
+#hero {
+    position: relative; /* Relative for absolute positioning of image */
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically for mobile */
+    height: 100vh; /* Keep 100vh for hero on mobile too if desired */
+    text-align: center; /* Center text */
+    padding: 20px; /* Padding for hero section */
+    box-sizing: border-box;  /* Include padding in height/width calculations */
+}
+
+#hero h1 {
+    margin-top: 0; /* No fixed margin-top for mobile - centered by flex */
+    font-size: 2.5em; /* Smaller for mobile */
+    color: white; /* White text for contrast */
+    margin-bottom: 10px; /* Space below heading */
+    position: relative; /* Position relative for animation */
+    z-index: 10; /* Ensure it sits above the image */
+    animation: zoomInLoad 1.5s ease-out forwards; /* Animation for loading effect */
+    opacity: 0; /* Start invisible for animation */
+    transform: scale(0.1); /* Start scaled down for animation */
+}
+#hero h2 {
+    font-size: 1.2em; /* Smaller subheading for mobile */
+    margin-bottom: 20px; /* Space below subheading */
+    position: relative; /* Position relative for animation */
+    margin-top: 50vh;; /* Center vertically in hero section */
+  
+}
+#hero p {
+    font-size: 1.5em; /* Smaller paragraph text for mobile */
+    margin-bottom: 20px; /* Space below paragraph */
+}
+
+.hero-image-container {
+    position: absolute; /* Absolute to position relative to hero section */
+    bottom: 50px; /* Position image at the bottom of hero section */
+    left: 0; /* Align to the left */
+    width: 100%; /* Full width for mobile */
+    height: 70vw; /* Responsive height for mobile image */
+    
+    z-index: 1; /* Ensure it sits below text but above background */
+    
+}
+
+.hero-image {
+    display: block; /* Block display for image */
+    width: 100%; /* Image fills container's width */
+    height: 100%; /* Image fills container's height */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    object-position: top; /* Position image at the top */
+    overflow-y: visible; /* Allow image to overflow if needed */
+}
+
+/* CONTENT SECTIONS (Mobile-First) */
+section {
+    padding: 60px 20px; /* Padding for mobile sections */
+    min-height: 50vh; /* Allow content sections to be shorter on mobile */
+    display: flex;  /* Flexbox for layout */
+    flex-direction: column;  /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text */
+    justify-content: center; /* Center content vertically */
+    box-sizing: content-box; /* Ensure padding doesn't affect height */
+}
+
+section h1, section h2 {
+    font-size: 2em; /* Smaller headings for mobile */
+    margin-bottom: 20px; /* Space below headings */
+}
+section p {
+    max-width: 600px; /* Limit paragraph width for readability */
+    margin-bottom: 15px; /* Space below paragraphs */
+}
+section ul { 
+    list-style: none; /* Remove default list styles */
+    padding: 0; /* Remove padding */
+    text-align: center; /* Center align list items */
+}
+section li {
+    margin-bottom: 10px; /* Space between list items */
+    font-size: 1.1em; /* Slightly larger font for list items */
+}
+
+/* JOIN SECTION (Mobile-First) */
+#join form {
+    display: flex;  /* Flexbox for layout */
+    flex-direction: column; /* Stack form elements vertically */
+    width: 90%; /* Full width for mobile */
+    max-width: 400px; /* Limit max width for readability */
+    margin-top: 20px; /* Space above form */
+    padding: 20px; /* Padding for form */
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background for form */
+    border-radius: 8px; /* Rounded corners for form */
+}
+
+#join label {
+    margin-bottom: 5px; /* Space below labels */
+    font-size: 1.1em; /* Slightly larger font for labels */
+    text-align: left; /* Align labels to the left */
+}
+
+#join input[type="text"],
+#join input[type="email"] {
+    width: 100%; /* Full width for inputs */
+    padding: 10px; /* Padding for inputs */
+    margin-bottom: 15px; /* Space below inputs */
+    border: 1px solid #555; /* Dark border for inputs */
+    background-color: #333; /* Dark background for inputs */
+    color: white; /* White text for contrast */
+    border-radius: 5px; /* Rounded corners for inputs */
+    font-size: 1em; /* Base font size for inputs */
+}
+
+#join button {
+    padding: 12px 20px; /* Padding for button */
+    background-color: rgb(0, 86, 179); /* Button background color */
+    color: white; /* White text for contrast */
+    border: none; /* No border for button */
+    border-radius: 5px; /* Rounded corners for button */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    font-size: 1.1em; /* Slightly larger font for button */
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+#join button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+
+
+
+/* Animations (remain the same) */
+@keyframes zoomInLoad {
+    0% {    
+        opacity: 0; /* Start invisible */
+        transform: scale(0.1); /* Start scaled down */
+    }
+    100% {
+        opacity: 1; /* Fully visible */
+        transform: scale(1); /* Scale to normal size */
+    }
+}
+
+/* News and Articles Section */
+#latest-discoveries {
+    padding: 0px 20px; /* Padding for latest discoveries section */
+    text-align: center; /* Center align text */
+}
+#news-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.news-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+}
+
+.news-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+}
+
+.card-content h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+    color: #333;
+}
+
+.card-content p {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.card-content .author-date {
+    font-size: 0.8em;
+    color: #999;
+}
+
+/* Full article page styles (optional, for article.html) */
+.full-article-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.full-article-container img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.full-article-container h1 {
+    font-size: 2.2em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.full-article-container .author-date {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.full-article-container p {
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 15px;
+}
+.full-article-container button {
+    background-color: rgb(0, 86, 179);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+/* ==================================================================== */
+/* DESKTOP STYLES (MEDIA QUERIES)        */
+/* These styles override the mobile-first styles for screens 768px and wider. */
+/* ==================================================================== */
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 0; /* No need for padding-top if header is not fixed or content sits below it naturally */
+    }
+
+    /* HEADER & NAVIGATION (Desktop Overrides) */
+    #main-nav {
+        justify-content: flex-end; /* Push navlinks to the right */
+        height: auto; /* Allow height to adapt to content */
+    }
+
+    .hamburger {
+        display: none; /* Hide hamburger on desktop */
+    }
+
+    .navlinks {
+        position: static; /* Bring it back to normal flow for desktop */
+        display: flex; /* Always visible on desktop */
+        flex-direction: row; /* Horizontal links */
+        width: auto; /* Let content determine width */
+        background-color: rgba(10, 0, 28, .8); /* Original desktop nav background */
+        box-shadow: none; /* No overlay shadow */
+        z-index: auto; /* Reset z-index for normal flow */
+        padding: 10px 0; /* Desktop padding */
+        max-height: none; /* Remove height constraints */
+        overflow-y: visible; /* No scrollbar */
+        border-radius: 8px; /* Original desktop border-radius */
+    }
+    .navlinks a {
+        padding: 10px 15px; /* Desktop padding for links */
+        border-radius: 8px; /* Desktop border-radius for links */
+        display: inline-block; /* Allow spacing between links */
+    }
+
+    /* HERO SECTION (Desktop Overrides) */
+    #hero {
+        justify-content: space-between; /* Restore original vertical alignment */
+        padding-bottom: 0; /* Remove bottom padding if image sits at bottom */
+    }
+
+    #hero h1 {
+        margin-top: 30vh; /* Restore original desktop margin-top */
+        font-size: 4em; /* Restore original larger font size for desktop */
+        margin-bottom: 20px; /* Space below heading */
+    }
+
+    .hero-image-container {
+        height: 300px; /* Restore original fixed pixel height for desktop */
+                       /* IMPORTANT: Adjust this if your Earth image needs more vertical space on desktop */
+    }
+
+    /* CONTENT SECTIONS (Desktop Overrides) */
+    section {
+        padding: 80px 40px; /* More padding for desktop */
+        min-height: 100vh; /* Restore full viewport height for sections on desktop */
+    }
+
+    section h1 {
+        font-size: 3.5em; /* Larger headings for desktop */
+    }
+    
+    section h2 {
+        font-size: 3em; /* Larger headings for desktop */
+    }
+    section p, section li {
+        font-size: 1.5em; /* Larger font size for paragraphs and list items on desktop */
+    }
+
+    /* JOIN SECTION (Desktop Overrides - Add if specific width/layout needed) */
+    #join form {
+        width: 60%; /* Example: Make form wider on desktop */
+        max-width: 600px; /* Example: Adjust max width */
+    }
+    
+}
