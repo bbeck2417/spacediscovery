@@ -405,8 +405,8 @@ footer p {
     flex-wrap: wrap; /* Allow links to wrap to the next line on smaller screens */
     justify-content: center; /* Center the links horizontally */
     align-items: center; /* Vertically align items */
-    gap: 15px; /* Space between links */
-    margin-top: 10px; /* Add some space above the social links section */
+    gap: 5px; /* Space between links */
+    margin-top: 5px; /* Add some space above the social links section */
 }
 
 .footer-social-links p {
