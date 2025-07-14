@@ -256,4 +256,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Call the fetchNews function when the page loads
     fetchNews();
+    const joinForm = document.getElementById('join-form');
+    const joinButton = document.getElementById('join-button');
+    joinButton.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the default form submission
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        if (name && email) {
+            // Here you can handle the form submission, e.g., send data to a server or display a success message
+            alert(`Thank you for joining, ${name}! We will contact you at ${email}.`);
+            joinForm.reset(); // Reset the form fields after submission
+        } else {
+            alert('Please fill in all fields before submitting.');
+        }
+    }
+    );
 });
