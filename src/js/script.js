@@ -324,7 +324,7 @@ joinForm.addEventListener('submit', function(event) {
         // Display the success message
         joinForm.innerHTML = `
             <div class="success-message">
-                <h3>🎉 Thank you for joining! 🎉</h3>
+                <h3>🎉 Thank you ${nameInput.value} for joining! 🎉</h3>
                 <p>We're excited to have you in our Space Discoveries community.</p>
                 <p>Redirecting you back to the form...</p>
             </div>
