@@ -358,7 +358,7 @@ joinForm.addEventListener('submit', function(event) {
             // Since we're only changing joinForm.innerHTML, the submit listener
             // on joinForm generally remains intact as long as joinForm itself isn't replaced.
 
-        }, 5000); // 5000 milliseconds = 5 seconds
+        }, 8000); // 8000 milliseconds = 8 seconds
 
         // In a real application, you'd send this data to your backend here
         // For demonstration, we're just showing the success message.
