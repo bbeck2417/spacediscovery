@@ -269,62 +269,103 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Call the fetchNews function when the page loads
   fetchNews();
-  // Get references to the form elements
-  const joinForm = document.getElementById("join-form");
-  const nameInput = document.getElementById("name");
-  const emailInput = document.getElementById("email");
-  const nameError = document.getElementById("name-error");
-  const emailError = document.getElementById("email-error");
+  // Get references to the form elements and its parent container
+const joinForm = document.getElementById('join-form');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const nameError = document.getElementById('name-error');
+const emailError = document.getElementById('email-error');
+// Get the parent container of the form, which is the section with id="join"
+const joinSection = document.getElementById('join');
 
-  // Function to validate the name field
-  function validateName() {
-    if (nameInput.value.trim() === "") {
-      nameError.textContent = "Name is required.";
-      nameInput.classList.add("invalid"); // Add a class for styling invalid input
-      return false;
+
+// Function to validate the name field
+function validateName() {
+    if (nameInput.value.trim() === '') {
+        nameError.textContent = 'Name is required.';
+        nameInput.classList.add('invalid');
+        return false;
     } else {
-      nameError.textContent = "";
-      nameInput.classList.remove("invalid");
-      return true;
+        nameError.textContent = '';
+        nameInput.classList.remove('invalid');
+        return true;
     }
-  }
+}
 
-  // Function to validate the email field
-  function validateEmail() {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
-    if (emailInput.value.trim() === "") {
-      emailError.textContent = "Email is required.";
-      emailInput.classList.add("invalid");
-      return false;
+// Function to validate the email field
+function validateEmail() {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailInput.value.trim() === '') {
+        emailError.textContent = 'Email is required.';
+        emailInput.classList.add('invalid');
+        return false;
     } else if (!emailPattern.test(emailInput.value.trim())) {
-      emailError.textContent = "Please enter a valid email address.";
-      emailInput.classList.add("invalid");
-      return false;
+        emailError.textContent = 'Please enter a valid email address.';
+        emailInput.classList.add('invalid');
+        return false;
     } else {
-      emailError.textContent = "";
-      emailInput.classList.remove("invalid");
-      return true;
+        emailError.textContent = '';
+        emailInput.classList.remove('invalid');
+        return true;
     }
-  }
+}
 
-  // Add an event listener to the form for submission
-  joinForm.addEventListener("submit", function (event) {
-    // Prevent the default form submission (which would refresh the page)
+// Add an event listener to the form for submission
+joinForm.addEventListener('submit', function(event) {
     event.preventDefault();
 
-    // Run all validation functions
     const isNameValid = validateName();
     const isEmailValid = validateEmail();
 
-    // If both fields are valid, you can proceed with form submission (e.g., send data to a server)
     if (isNameValid && isEmailValid) {
-      alert("Thank you for joining our community!"); // Or replace with actual form submission logic (e.g., fetch API)
-      joinForm.reset(); // Clear the form fields
-      // In a real application, you'd send this data to your backend here
-    }
-  });
+        // Store the original form HTML
+        const originalFormHTML = joinForm.innerHTML;
 
-  // Optional: Add real-time validation as the user types
-  nameInput.addEventListener("input", validateName);
-  emailInput.addEventListener("input", validateEmail);
+        // Display the success message
+        joinForm.innerHTML = `
+            <div class="success-message">
+                <h3>🎉 Thank you for joining! 🎉</h3>
+                <p>We're excited to have you in our Space Discoveries community.</p>
+                <p>Redirecting you back to the form...</p>
+            </div>
+        `;
+
+        // Hide the error messages that might still be there if input was invalid
+        nameError.textContent = '';
+        emailError.textContent = '';
+
+        // After 5 seconds, revert to the original form
+        setTimeout(() => {
+            joinForm.innerHTML = originalFormHTML;
+            // Re-get references to the new elements and re-attach event listeners
+            // This is crucial because setting innerHTML recreates the elements
+            // If not done, the validation and submit listeners won't work on the 'new' form inputs/button.
+            const newNameInput = document.getElementById('name');
+            const newEmailInput = document.getElementById('email');
+            const newNameError = document.getElementById('name-error');
+            const newEmailError = document.getElementById('email-error');
+            const newJoinButton = document.getElementById('join-button'); // Also get the new button if needed for other listeners
+
+            // Re-attach input event listeners for real-time validation
+            if (newNameInput) newNameInput.addEventListener('input', validateName);
+            if (newEmailInput) newEmailInput.addEventListener('input', validateEmail);
+
+            // Note: The 'submit' event listener is on `joinForm` itself,
+            // so it doesn't need to be re-attached directly to the button
+            // unless your logic specifically relies on the button's click for submission.
+            // However, if `joinForm` itself was replaced (e.g., if you changed `joinSection.innerHTML`),
+            // you'd need to re-attach the submit listener to the new form too.
+            // Since we're only changing joinForm.innerHTML, the submit listener
+            // on joinForm generally remains intact as long as joinForm itself isn't replaced.
+
+        }, 5000); // 5000 milliseconds = 5 seconds
+
+        // In a real application, you'd send this data to your backend here
+        // For demonstration, we're just showing the success message.
+    }
+});
+
+// Initial attachment of real-time validation for when the page first loads
+nameInput.addEventListener('input', validateName);
+emailInput.addEventListener('input', validateEmail);
 });
