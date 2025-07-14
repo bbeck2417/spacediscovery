@@ -407,6 +407,7 @@ footer p {
     align-items: center; /* Vertically align items */
     gap: 5px; /* Space between links */
     margin-top: 5px; /* Add some space above the social links section */
+    text-decoration: none;
 }
 
 .footer-social-links p {
