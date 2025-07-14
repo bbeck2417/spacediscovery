@@ -258,6 +258,20 @@ section li {
     background-color: #0056b3; /* Darker shade on hover */
 }
 
+.error-message {
+    color: #ff4d4d; /* Bright red color for errors */
+    font-size: 0.85em; /* Slightly smaller font size */
+    margin-top: -10px; /* Pull it up closer to the input */
+    margin-bottom: 10px; /* Space below the error message */
+    display: block; /* Ensure it takes its own line */
+    text-align: left; /* Align text to the left */
+}
+
+/* Style for invalid input fields */
+#join input.invalid {
+    border-color: #ff4d4d; /* Red border for invalid input */
+    box-shadow: 0 0 5px rgba(255, 77, 77, 0.5); /* Subtle red glow */
+}
 
 
 
