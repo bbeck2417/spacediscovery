@@ -407,7 +407,6 @@ footer p {
     align-items: center; /* Vertically align items */
     gap: 5px; /* Space between links */
     margin-top: 5px; /* Add some space above the social links section */
-    text-decoration: none;
 }
 
 .footer-social-links p {
@@ -428,6 +427,16 @@ footer p {
 .footer-social-links a:hover {
     color: rgb(77, 195, 255); /* Lighter blue on hover */
     text-decoration: underline; /* Add underline on hover for clarity */
+}
+.footer-social-links a i {
+    margin-right: 5px; /* Space between the icon and the text */
+    font-size: 1.1em; /* Slightly larger icon */
+    vertical-align: middle; /* Align icon vertically with text */
+}
+
+/* You can also target specific icon colors if you wish */
+.footer-social-links a:hover i {
+    color: inherit; /* Inherit the hover color from the parent link */
 }
 
 /* ==================================================================== */
