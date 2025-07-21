@@ -453,6 +453,55 @@ footer p {
     color: inherit; /* Inherit the hover color from the parent link */
 }
 
+/* --- */
+/* MOBILE LANDSCAPE STYLES */
+/* These styles apply when a screen is 768px or less AND in landscape mode. */
+/* --- */
+@media only screen and (max-width: 768px) and (orientation: landscape) {
+
+    /* Reduce the height and padding of the main navigation bar */
+    #main-nav {
+        height: 45px; /* Slightly reduce the height of the header bar */
+        padding: 5px 15px; /* Reduce padding for a more compact look */
+    }
+
+    /* Adjust the hamburger icon size if it looks too big */
+    .hamburger {
+        font-size: 24px; /* Slightly smaller hamburger icon */
+        padding: 3px;
+    }
+
+    /* Adjust the logo/icon size and margin */
+    #logo {
+        margin: 5px auto 0px 5px; /* Reduce margins for the logo */
+    }
+    #logo .material-symbols-outlined {
+        font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 20; /* Smaller icon size for the recycling symbol */
+    }
+
+    /* Adjust the dropdown navlinks when active in landscape */
+    .navlinks {
+        top: 45px; /* Position just below the smaller header */
+        max-height: calc(100vh - 45px); /* Adjust max-height based on new header height */
+        padding: 10px 0; /* Reduce vertical padding for the overall navlinks container */
+    }
+
+    /* Adjust individual navigation links */
+    .navlinks a {
+        padding: 10px 0; /* Reduce vertical padding for each link */
+        font-size: 0.9em; /* Make the font size slightly smaller */
+    }
+
+    /* Adjust body padding-top to account for the smaller fixed header */
+    body {
+        padding-top: 45px; /* Match body padding to the new fixed header height */
+    }
+}
+
 /* ==================================================================== */
 /* DESKTOP STYLES (MEDIA QUERIES)        */
 /* These styles override the mobile-first styles for screens 768px and wider. */
