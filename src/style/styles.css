@@ -457,7 +457,7 @@ footer p {
 /* MOBILE LANDSCAPE STYLES */
 /* These styles apply when a screen is 768px or less AND in landscape mode. */
 /* --- */
-@media only screen and (max-width: 768px) and (orientation: landscape) {
+@media only screen and (max-width: 932px) and (orientation: landscape) {
 
     /* Reduce the height and padding of the main navigation bar */
     #main-nav {
