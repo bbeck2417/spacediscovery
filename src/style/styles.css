@@ -504,10 +504,10 @@ footer p {
 
 /* ==================================================================== */
 /* DESKTOP STYLES (MEDIA QUERIES)        */
-/* These styles override the mobile-first styles for screens 768px and wider. */
+/* These styles override the mobile-first styles for screens 932px and wider. */
 /* ==================================================================== */
 
-@media (min-width: 768px) {
+@media (min-width: 932px) {
     body {
         padding-top: 0; /* No need for padding-top if header is not fixed or content sits below it naturally */
     }
