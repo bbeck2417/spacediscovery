@@ -269,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       card.addEventListener("click", () => {
         // Open the full article in a new page
-        window.location.href = `../src/articles/index.html?id=${article.id}`;
+        window.location.href = `src/articles/index.html?id=${article.id}`;
       });
 
       newsContainer.appendChild(card);
