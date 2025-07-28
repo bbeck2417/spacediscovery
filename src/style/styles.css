@@ -48,7 +48,7 @@ header {
     height: 40px; /* Consistent height for the header bar */
 }
 
-#logo, a {
+#logo, span {
     display: flex;
     margin: 10px auto 0px 10px;
     text-decoration: none;
@@ -213,6 +213,33 @@ section li {
     font-size: 1.1em; /* Slightly larger font for list items */
 }
 
+/* Style for links in sections */
+#articles-link {
+    margin: 20px 0; /* Space above and below the link */  
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack text vertically */
+    align-items: center; /* Center align text */    
+}
+#articles-link p, #articles-link a h2 {
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease; /* Smooth hover effect */
+    font-size: 1.2em; /* Slightly larger font for emphasis */
+    margin: 0; /* Remove default margins */
+    padding: 10px; /* Padding for better tap area */
+    text-align: center; /* Center align text */
+}
+
+#read-more  {
+    text-decoration: none;
+    color:  rgb(0, 86, 179);
+    font-size: 1.3em; /* Slightly larger font for emphasis */
+    transition: color 0.3s ease; /* Smooth hover effect */
+    text-align: center; /* Center align text */
+}
+#read-more:hover {
+    color: rgb(77, 195, 255); /* Lighter blue on hover */
+    transition: color 0.3s ease; /* Smooth hover effect */
+}
 /* JOIN SECTION (Mobile-First) */
 #join form {
     display: flex;  /* Flexbox for layout */
@@ -289,7 +316,7 @@ section li {
 
 /* News and Articles Section */
 #latest-discoveries {
-    padding: 0px 20px; /* Padding for latest discoveries section */
+    padding: 15vh 0px 20px; /* Padding for latest discoveries section */
     text-align: center; /* Center align text */
 }
 #news-container {
@@ -343,7 +370,7 @@ section li {
 /* Full article page styles (optional, for article.html) */
 .full-article-container {
     max-width: 800px;
-    margin: 40px auto;
+    margin: 15vh auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;

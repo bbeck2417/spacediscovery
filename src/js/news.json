@@ -2,7 +2,7 @@
 [
   {
     "id": "1",
-    "image":"/spacediscovery/src/images/exoplanet.jpg",
+    "image":"/src/images/exoplanet.jpg",
     "author": "Dr. Aris Thorne",
     "title": "Breakthrough! 'Oceanus' Exoplanet Found Teeming with Water in Habitable Zone 💧",
     "datePublished": "2025-07-10T10:00:00Z",
@@ -10,7 +10,7 @@
   },
   {
     "id": "2",
-    "image":"/spacediscovery/src/images/blackhole.jpg",
+    "image":"/src/images/blackhole.jpg",
     "author": "Dr. Lena Petrova",
     "title": "Nearby Galaxy Hides Enormous Black Hole, Astronomers Confirm 🌌",
     "datePublished": "2025-07-08T10:00:00Z",
@@ -18,7 +18,7 @@
   },
   {
     "id": "3",
-    "image":"/spacediscovery/src/images/dark_matter.jpg",
+    "image":"/src/images/dark_matter.jpg",
     "author": "Professor J. Alistair Finch",
     "title": "Cosmic Web Unveiled: Dark Matter Filaments Directly Observed for First Time 🕸️",
     "datePublished": "2025-07-05T10:00:00Z",
@@ -26,7 +26,7 @@
   },
   {
     "id": "4",
-    "image":"/spacediscovery/src/images/rogue_planet.jpg",
+    "image":"/src/images/rogue_planet.jpg",
     "author": "Dr. Kaelen Sharma",
     "title": "Rogue Planet Found Roaming Galactic Halo: A Lonely Wanderer 🚶‍♂️",
     "datePublished": "2025-07-03T10:00:00Z",
@@ -34,7 +34,7 @@
   },
   {
     "id": "5",
-    "image":"/spacediscovery/src/images/voyager3.jpg",
+    "image":"/src/images/voyager3.jpg",
     "author": "Astro-Journalist Maya Singh",
     "title": "Voyager 3: Humanity's Deepest Reach into Interstellar Space Commences 🚀",
     "datePublished": "2025-07-01T10:00:00Z",
@@ -42,7 +42,7 @@
   },
   {
     "id": "6",
-    "image":"/spacediscovery/src/images/quantum_entanglement.jpg",
+    "image":"/src/images/quantum_entanglement.jpg",
     "author": "Dr. Xing Li",
     "title": "Quantum Entanglement Confirmed Across Galactic Distances: A Cosmic Connection! ✨",
     "datePublished": "2025-06-28T10:00:00Z",
@@ -50,7 +50,7 @@
   },
   {
     "id": "7",
-    "image":"/spacediscovery/src/images/stardust_bloom.jpg",
+    "image":"/src/images/stardust_bloom.jpg",
     "author": "Professor Elias Vance",
     "title": "Nebula 'Stardust Bloom' Reveals Youngest Star Nursery Ever Observed 🌟",
     "datePublished": "2025-06-25T10:00:00Z",
@@ -58,7 +58,7 @@
   },
   {
     "id": "8",
-    "image":"/spacediscovery/src/images/asteroid_mining.jpg",
+    "image":"/src/images/asteroid_mining.png",
     "author": "Dr. Serena Patel",
     "title": "Asteroid Mining Initiative Secures First Billion-Dollar Contract: The New Gold Rush Begins ⛏️",
     "datePublished": "2025-06-22T10:00:00Z",
@@ -66,7 +66,7 @@
   },
   {
     "id": "9",
-    "image":"/spacediscovery/src/images/cosmic_fossils.jpg",
+    "image":"/src/images/cosmic_fossils.jpg",
     "author": "Professor Kenji Tanaka",
     "title": "Exotic Matter Discovered in Cosmic Rays: Clues to Universe's Earliest Moments 🌀",
     "datePublished": "2025-06-20T10:00:00Z",
@@ -74,7 +74,7 @@
   },
   {
     "id": "10",
-    "image":"/spacediscovery/src/images/lunar_city.jpg",
+    "image":"/src/images/lunar_city.jpg",
     "author": "Dr. Chloe Dubois",
     "title": "Lunar Lava Tube City: A Blueprint for Permanent Moon Habitation Revealed 🌕",
     "datePublished": "2025-06-18T10:00:00Z",
