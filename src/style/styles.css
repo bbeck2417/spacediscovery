@@ -231,15 +231,19 @@ section li {
 
 #read-more  {
     text-decoration: none;
-    color:  rgb(0, 86, 179);
-    font-size: 1.3em; /* Slightly larger font for emphasis */
-    transition: color 0.3s ease; /* Smooth hover effect */
+    color:  white;
+    font-size: 1.1em; /* Slightly larger font for emphasis */
+    transition: background-color 0.3s ease; /* Smooth hover effect */
     text-align: center; /* Center align text */
+    background-color: rgb(0, 86, 179);
+    padding: 10px 20px; /* Padding for better tap area */
+    border: none; /* No border for button */
+    border-radius: 5px; /* Rounded corners for button */
 }
-#read-more:hover {
+/* #read-more:hover {
     color: rgb(77, 195, 255); /* Lighter blue on hover */
-    transition: color 0.3s ease; /* Smooth hover effect */
-}
+   /* transition: color 0.3s ease; /* Smooth hover effect */
+/*} */    
 /* JOIN SECTION (Mobile-First) */
 #join form {
     display: flex;  /* Flexbox for layout */
