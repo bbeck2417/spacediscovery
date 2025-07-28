@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch('/src/js/news.json'); // Adjust the path to your JSON file as needed
+        const response = await fetch('../js/news.json'); // Adjust the path to your JSON file as needed
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             fullArticleContent.innerHTML = `
                 <h1>${article.title}</h1>
                 <span class="author-date">By ${article.author} on ${new Date(article.datePublished).toLocaleDateString()}</span>
-                <img src="${article.image}" alt="${article.title}">
+                <img src="src/images/${article.image}" alt="${article.title}">
                 <p>${article.content}</p>
                 <div class="articleBackButton"><button id="back-to-news-button">Back to Articles</button></div> `;
 

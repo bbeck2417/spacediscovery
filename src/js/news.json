@@ -66,7 +66,7 @@
   },
   {
     "id": "9",
-    "image":"../images/cosmic_fossils.jpg",
+    "image":"../src/images/cosmic_fossil.jpg",
     "author": "Professor Kenji Tanaka",
     "title": "Exotic Matter Discovered in Cosmic Rays: Clues to Universe's Earliest Moments 🌀",
     "datePublished": "2025-06-20T10:00:00Z",
@@ -74,7 +74,7 @@
   },
   {
     "id": "10",
-    "image":"../images/lunar_city.jpg",
+    "image":"lunar_city.jpg",
     "author": "Dr. Chloe Dubois",
     "title": "Lunar Lava Tube City: A Blueprint for Permanent Moon Habitation Revealed 🌕",
     "datePublished": "2025-06-18T10:00:00Z",
