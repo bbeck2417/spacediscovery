@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Function to fetch news data
   async function fetchNews() {
     try {
-      const response = await fetch("src/js/news.json"); // Assuming your JSON file is named news.json
+      const response = await fetch("./js/news.json"); // Assuming your JSON file is named news.json
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
