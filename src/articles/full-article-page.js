@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch('../js/news.json');
+        const response = await fetch('/src/js/news.json'); // Adjust the path to your JSON file as needed
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
