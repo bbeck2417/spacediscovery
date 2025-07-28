@@ -257,7 +257,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const shortContent = article.content.substring(0, 150) + "...";
 
       card.innerHTML = `
-                <img src="${article.image}" alt="${article.title}">
+                <img src="src/images/${article.image}" alt="${article.title}">
                 <div class="card-content">
                     <h2>${article.title}</h2>
                     <p>${shortContent}</p>
