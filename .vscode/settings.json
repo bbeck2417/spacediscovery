@@ -1,3 +1,4 @@
 {
-    "liveServer.settings.multiRootWorkspaceName": "spacediscovery"
+    "liveServer.settings.multiRootWorkspaceName": "spacediscovery",
+    "liveServer.settings.root": "/"
 }
