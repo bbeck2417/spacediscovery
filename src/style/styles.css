@@ -519,24 +519,21 @@ footer p {
 .footer-social-links a:hover i {
     color: inherit; /* Inherit the hover color from the parent link */
 }
+
 #images-page-layout {
-    padding: 15vh; /* Padding for images page layout */
+    padding: 15vh 20px; /* Added horizontal padding for mobile */
     text-align: center; /* Center align text */
 }
+
 .image-gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    display: flex; /* Use flexbox for mobile */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally within the flex container */
     gap: 20px;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 500px; /* Keep max-width to constrain the gallery */
+    margin: 0 auto; /* This centers the gallery container itself */
 }
-.gallery-image {
-    width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for images */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-}
+
 .image-card {
     background-color: #000;
     border-radius: 8px;
@@ -544,8 +541,29 @@ footer p {
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+    width: 100%; /* Ensure card takes full width available up to max-width */
+    max-width: 300px; /* Constrain individual card width if needed, or let it grow with image */
+    text-align: center; /* Center content (including images) within the card */
 }
 
+.image-card img { /* This rule is more specific and targets images within image-card */
+    display: block; /* Make the image a block element */
+    max-width: 100%; /* Ensure image doesn't overflow its container */
+    height: auto; /* Maintain aspect ratio */
+    margin: 0 auto; /* This is crucial for centering the image itself */
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+
+/* Fix for a duplicate class on one of your images in HTML: */
+.gallery-image { /* Keep this if you have other uses, but the .image-card img rule is more important here */
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
 /* --- */
 /* MOBILE LANDSCAPE STYLES */
 /* These styles apply when a screen is 768px or less AND in landscape mode. */
@@ -650,7 +668,23 @@ footer p {
         height: 300px; /* Restore original fixed pixel height for desktop */
                        /* IMPORTANT: Adjust this if your Earth image needs more vertical space on desktop */
     }
-    
+     .image-gallery {
+        display: grid; /* Revert to grid for desktop */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+        max-width: 1200px; /* Adjust max-width for desktop gallery if needed */
+        margin: 0 auto; /* Still centers the overall gallery */
+    }
+
+    .image-card {
+        text-align: left; /* Revert text alignment for desktop if needed */
+        max-width: none; /* Remove max-width on individual cards for desktop grid */
+    }
+
+    .image-card img {
+        display: block; /* Keep image as block */
+        margin: 0; /* Remove auto margin as grid handles layout */
+    }
 
     /* CONTENT SECTIONS (Desktop Overrides) */
     section {
