@@ -183,6 +183,42 @@ header {
     overflow-y: visible; /* Allow image to overflow if needed */
 }
 
+#welcome-table {
+    width: 100%; /* Full width for mobile */
+    max-width: 600px; /* Limit max width for readability */
+    margin: 20px auto; /* Center table with margin */
+    border-collapse: collapse; /* Collapse borders for cleaner look */
+    display: table; /* Ensure it behaves like a table */
+    
+    
+}
+#welcome-table td,
+#welcome-table th {
+    border: 2px solid #ccc; /* Light border for table cells */
+    padding: 10px; /* Padding for table cells */
+    text-align: center; /* Center align text in table cells */
+    font-size: 1.1em; /* Slightly larger font for table cells */
+    
+}
+
+#welcome-table a {
+        color: white;
+    font-size: 1.1em;
+    text-align: center;
+    background-color: rgb(0, 86, 179);
+    text-decoration: none;
+    transition: background-color 0.3s;
+    padding: 10px 20px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    border-radius: 5px;
+}
+#welcome-table a:hover {
+    background-color: #0056b3;
+}
+
 /* CONTENT SECTIONS (Mobile-First) */
 section {
     padding: 60px 20px; /* Padding for mobile sections */
@@ -482,6 +518,32 @@ footer p {
 /* You can also target specific icon colors if you wish */
 .footer-social-links a:hover i {
     color: inherit; /* Inherit the hover color from the parent link */
+}
+#images-page-layout {
+    padding: 15vh; /* Padding for images page layout */
+    text-align: center; /* Center align text */
+}
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.gallery-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px; /* Rounded corners for images */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
+}
+.image-card {
+    background-color: #000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
 
 /* --- */
