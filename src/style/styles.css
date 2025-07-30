@@ -112,7 +112,7 @@ header {
 .navlinks li {
     list-style: none; /* Remove default list styles */
     text-align: center; /* Center align links */
-    width: 100%; /* Full width for each link */
+    
 }
 .navlinks a {
     display: block; /* Block display for full width */
@@ -340,6 +340,14 @@ section li {
     box-shadow: 0 0 5px rgba(255, 77, 77, 0.5); /* Subtle red glow */
 }
 
+#my-favorite-galaxy {
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center content horizontally */
+    justify-content: center; /* Center content vertically */
+    padding: 15vh 20px; /* Padding for my favorite galaxy section */
+    text-align: center; /* Center align text */
+}
 
 
 /* Animations (remain the same) */
