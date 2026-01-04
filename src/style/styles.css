@@ -4,15 +4,22 @@
    but are specifically tailored for smaller (mobile) screens.
    Larger screen styles will override these in the media query below. */
 /* ==================================================================== */
+
+/* FIX: Silences Chrome warning about overflow on media elements */
+/* This satisfies the View Transitions API requirements */
+img, video, canvas {
+    overflow: clip;
+    overflow-clip-margin: content-box;
+}
+
 html {
-    scroll-behavior: smooth; /* Optional: for smooth scrolling, if you want it */
+    scroll-behavior: smooth; /* Optional: for smooth scrolling */
     scroll-padding-top: 117.5px; /* This is crucial for *all* hash links */
 }
 html, body {
     margin: 0;
     padding: 0;
-    /* Ensure html and body fill the viewport vertically.
-       min-height 100% on html, and then min-height: 100vh on body is a good combo. */
+    /* Ensure html and body fill the viewport vertically. */
     min-height: 100%;
     height: auto; /* Allow height to adjust to content */
     overflow-x: hidden; /* Prevents horizontal scrollbar if 100vw causes it */
@@ -80,13 +87,19 @@ header {
     display: inline-block; /* Essential for transform to work correctly */
 }
 
-.hamburger { /* Assuming you added this to HTML */
-    display: block; /* Show on mobile */
-    font-size: 30px; /* Larger icon for easier tapping */
-    color: white; /* White color for contrast */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    z-index: 1001; /* Ensure it sits above navlinks */
-    padding: 5px; /* Padding for better tap area */
+.hamburger {
+    display: block;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 5px;
+
+    /* ADD THESE LINES TO RESET BUTTON STYLES */
+    background: none;
+    border: none;
+    outline: none;
+    /* We will add a custom focus ring below */
 }
 
 .navlinks {
@@ -102,7 +115,7 @@ header {
     flex-direction: column; /* Stack links vertically */
     padding: 20px 0; /* Padding for links */
     max-height: calc(100vh - 60px); /* Full height minus header */
-    overflow-y: auto; /* Scrollable if content exceeds viewport height, possible for landscape on some devices */
+    overflow-y: auto; /* Scrollable if content exceeds viewport height */
 }
 
 .navlinks.active {
@@ -169,9 +182,7 @@ header {
     left: 0; /* Align to the left */
     width: 100%; /* Full width for mobile */
     height: 70vw; /* Responsive height for mobile image */
-    
     z-index: 1; /* Ensure it sits below text but above background */
-    
 }
 
 .hero-image {
@@ -180,7 +191,7 @@ header {
     height: 100%; /* Image fills container's height */
     object-fit: cover; /* Cover the container while maintaining aspect ratio */
     object-position: top; /* Position image at the top */
-    overflow-y: visible; /* Allow image to overflow if needed */
+    /* REMOVED: overflow-y: visible; (Caused deprecation warning) */
 }
 
 #welcome-table {
@@ -189,20 +200,18 @@ header {
     margin: 20px auto; /* Center table with margin */
     border-collapse: collapse; /* Collapse borders for cleaner look */
     display: table; /* Ensure it behaves like a table */
-    
-    
 }
+
 #welcome-table td,
 #welcome-table th {
     border: 2px solid #ccc; /* Light border for table cells */
     padding: 10px; /* Padding for table cells */
     text-align: center; /* Center align text in table cells */
     font-size: 1.1em; /* Slightly larger font for table cells */
-    
 }
 
 #welcome-table a {
-        color: white;
+    color: white;
     font-size: 1.1em;
     text-align: center;
     background-color: rgb(0, 86, 179);
@@ -276,10 +285,7 @@ section li {
     border: none; /* No border for button */
     border-radius: 5px; /* Rounded corners for button */
 }
-/* #read-more:hover {
-    color: rgb(77, 195, 255); /* Lighter blue on hover */
-   /* transition: color 0.3s ease; /* Smooth hover effect */
-/*} */    
+  
 /* JOIN SECTION (Mobile-First) */
 #join form {
     display: flex;  /* Flexbox for layout */
@@ -349,8 +355,7 @@ section li {
     text-align: center; /* Center align text */
 }
 
-
-/* Animations (remain the same) */
+/* Animations */
 @keyframes zoomInLoad {
     0% {    
         opacity: 0; /* Start invisible */
@@ -415,7 +420,7 @@ section li {
     color: #999;
 }
 
-/* Full article page styles (optional, for article.html) */
+/* Full article page styles */
 .full-article-container {
     max-width: 800px;
     margin: 15vh auto;
@@ -449,7 +454,6 @@ section li {
     line-height: 1.6;
     color: #444;
     margin-bottom: 15px;
-    
 }
 
 .articleBackButton {
@@ -466,8 +470,8 @@ section li {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
-    
 }
+
 /* ==================================================================== */
 /* FOOTER STYLES */
 /* ==================================================================== */
@@ -480,11 +484,11 @@ footer {
     display: flex; /* Use flexbox for main footer content */
     flex-direction: column; /* Stack items vertically */
     align-items: center; /* Center items horizontally within the footer */
-    gap: 15px; /* Space between flex items (p, div.footer-social-links) */
+    gap: 15px; /* Space between flex items */
 }
 
 footer p {
-    margin: 0; /* Remove default paragraph margins to control spacing with gap */
+    margin: 0; /* Remove default paragraph margins */
     font-size: 0.9em; /* Slightly smaller font for copyright */
     line-height: 1.5;
 }
@@ -501,7 +505,7 @@ footer p {
 .footer-social-links p {
     font-size: 1em; /* Adjust font size for the "Follow" text */
     margin-right: 10px; /* Space between "Follow" text and the first link */
-    white-space: nowrap; /* Prevent "Follow my favorite channels:" from wrapping */
+    white-space: nowrap; /* Prevent wrapping */
 }
 
 .footer-social-links a {
@@ -523,7 +527,6 @@ footer p {
     vertical-align: middle; /* Align icon vertically with text */
 }
 
-/* You can also target specific icon colors if you wish */
 .footer-social-links a:hover i {
     color: inherit; /* Inherit the hover color from the parent link */
 }
@@ -549,184 +552,192 @@ footer p {
     overflow: hidden;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
-    width: 100%; /* Ensure card takes full width available up to max-width */
-    max-width: 300px; /* Constrain individual card width if needed, or let it grow with image */
-    text-align: center; /* Center content (including images) within the card */
+    width: 100%; /* Ensure card takes full width available */
+    max-width: 300px; /* Constrain individual card width */
+    text-align: center; /* Center content within the card */
 }
 
-.image-card img { /* This rule is more specific and targets images within image-card */
+.image-card img {
     display: block; /* Make the image a block element */
     max-width: 100%; /* Ensure image doesn't overflow its container */
     height: auto; /* Maintain aspect ratio */
-    margin: 0 auto; /* This is crucial for centering the image itself */
+    margin: 0 auto; /* Crucial for centering the image */
     border-radius: 8px; /* Rounded corners for images */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: transform 0.2s ease-in-out; /* Smooth hover effect */
 }
 
-/* Fix for a duplicate class on one of your images in HTML: */
-.gallery-image { /* Keep this if you have other uses, but the .image-card img rule is more important here */
+.gallery-image { 
     width: 100%;
     height: auto; /* Maintain aspect ratio */
     border-radius: 8px; /* Rounded corners for images */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     transition: transform 0.2s ease-in-out; /* Smooth hover effect */
 }
+
 /* --- */
 /* MOBILE LANDSCAPE STYLES */
-/* These styles apply when a screen is 768px or less AND in landscape mode. */
 /* --- */
 @media only screen and (max-width: 932px) and (orientation: landscape) {
 
-    /* Reduce the height and padding of the main navigation bar */
     #main-nav {
-        height: 45px; /* Slightly reduce the height of the header bar */
-        padding: 5px 15px; /* Reduce padding for a more compact look */
+        height: 45px;
+        padding: 5px 15px;
     }
 
-    /* Adjust the hamburger icon size if it looks too big */
     .hamburger {
-        font-size: 24px; /* Slightly smaller hamburger icon */
+        font-size: 24px;
         padding: 3px;
     }
 
-    /* Adjust the logo/icon size and margin */
     #logo {
-        margin: 5px auto 0px 5px; /* Reduce margins for the logo */
+        margin: 5px auto 0px 5px;
     }
     #logo .material-symbols-outlined {
-        font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 20; /* Smaller icon size for the recycling symbol */
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
     }
 
-    /* Adjust the dropdown navlinks when active in landscape */
     .navlinks {
-        top: 45px; /* Position just below the smaller header */
-        max-height: calc(100vh - 45px); /* Adjust max-height based on new header height */
-        padding: 10px 0; /* Reduce vertical padding for the overall navlinks container */
+        top: 45px;
+        max-height: calc(100vh - 45px);
+        padding: 10px 0;
     }
 
-    /* Adjust individual navigation links */
     .navlinks a {
-        padding: 10px 0; /* Reduce vertical padding for each link */
-        font-size: 0.9em; /* Make the font size slightly smaller */
+        padding: 10px 0;
+        font-size: 0.9em;
     }
 
-    /* Adjust body padding-top to account for the smaller fixed header */
     body {
-        padding-top: 45px; /* Match body padding to the new fixed header height */
+        padding-top: 45px;
     }
 }
 
 /* ==================================================================== */
 /* DESKTOP STYLES (MEDIA QUERIES)        */
-/* These styles override the mobile-first styles for screens 932px and wider. */
 /* ==================================================================== */
 
 @media (min-width: 932px) {
     body {
-        padding-top: 0; /* No need for padding-top if header is not fixed or content sits below it naturally */
+        padding-top: 0;
     }
 
     /* HEADER & NAVIGATION (Desktop Overrides) */
     #main-nav {
-        justify-content: flex-end; /* Push navlinks to the right */
-        height: auto; /* Allow height to adapt to content */
+        justify-content: flex-end; 
+        height: auto;
     }
 
     .hamburger {
-        display: none; /* Hide hamburger on desktop */
+        display: none; 
     }
 
     .navlinks {
-        position: static; /* Bring it back to normal flow for desktop */
-        display: flex; /* Always visible on desktop */
-        flex-direction: row; /* Horizontal links */
-        width: auto; /* Let content determine width */
-        background-color: rgba(10, 0, 28, .8); /* Original desktop nav background */
-        box-shadow: none; /* No overlay shadow */
-        z-index: auto; /* Reset z-index for normal flow */
-        padding: 10px 0; /* Desktop padding */
-        max-height: none; /* Remove height constraints */
-        overflow-y: visible; /* No scrollbar */
-        border-radius: 8px; /* Original desktop border-radius */
+        position: static; 
+        display: flex; 
+        flex-direction: row; 
+        width: auto; 
+        background-color: rgba(10, 0, 28, .8); 
+        box-shadow: none; 
+        z-index: auto; 
+        padding: 10px 0; 
+        max-height: none; 
+        overflow-y: visible; 
+        border-radius: 8px; 
     }
     .navlinks a {
-        padding: 10px 15px; /* Desktop padding for links */
-        border-radius: 8px; /* Desktop border-radius for links */
-        display: inline-block; /* Allow spacing between links */
+        padding: 10px 15px;
+        border-radius: 8px; 
+        display: inline-block; 
     }
 
     /* HERO SECTION (Desktop Overrides) */
     #hero {
-        justify-content: space-between; /* Restore original vertical alignment */
-        padding-bottom: 0; /* Remove bottom padding if image sits at bottom */
+        justify-content: space-between; 
+        padding-bottom: 0; 
     }
 
     #hero h1 {
-        margin-top: 30vh; /* Restore original desktop margin-top */
-        font-size: 4em; /* Restore original larger font size for desktop */
-        margin-bottom: 20px; /* Space below heading */
+        margin-top: 30vh; 
+        font-size: 4em; 
+        margin-bottom: 20px; 
     }
 
     .hero-image-container {
-        height: 300px; /* Restore original fixed pixel height for desktop */
-                       /* IMPORTANT: Adjust this if your Earth image needs more vertical space on desktop */
+        height: 300px;
     }
      .image-gallery {
-        display: grid; /* Revert to grid for desktop */
+        display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 20px;
-        max-width: 1200px; /* Adjust max-width for desktop gallery if needed */
-        margin: 0 auto; /* Still centers the overall gallery */
+        max-width: 1200px; 
+        margin: 0 auto; 
     }
 
     .image-card {
-        text-align: left; /* Revert text alignment for desktop if needed */
-        max-width: none; /* Remove max-width on individual cards for desktop grid */
+        text-align: left; 
+        max-width: none; 
     }
 
     .image-card img {
-        display: block; /* Keep image as block */
-        margin: 0; /* Remove auto margin as grid handles layout */
+        display: block; 
+        margin: 0; 
     }
 
     /* CONTENT SECTIONS (Desktop Overrides) */
     section {
-        padding: 20px 40px; /* More padding for desktop */
-        min-height: 10vh; /* Restore full viewport height for sections on desktop */
+        padding: 20px 40px; 
+        min-height: 10vh; 
     }
 
     section h1 {
-        font-size: 3.5em; /* Larger headings for desktop */
+        font-size: 3.5em; 
     }
     
     section h2 {
-        font-size: 3em; /* Larger headings for desktop */
+        font-size: 3em; 
     }
     section p, section li {
-        font-size: 1.5em; /* Larger font size for paragraphs and list items on desktop */
+        font-size: 1.5em; 
     }
 
-    /* JOIN SECTION (Desktop Overrides - Add if specific width/layout needed) */
+    /* JOIN SECTION (Desktop Overrides) */
     #join form {
-        width: 60%; /* Example: Make form wider on desktop */
-        max-width: 600px; /* Example: Adjust max width */
+        width: 60%; 
+        max-width: 600px; 
     }
-    /* Media Query for larger screens (adjust as needed) */
  
     footer {
-        flex-direction: row; /* On desktop, arrange items horizontally */
-        justify-content: space-between; /* Space out copyright and social links */
-        padding: 30px 40px; /* More padding for desktop */
+        flex-direction: row; 
+        justify-content: space-between; 
+        padding: 30px 40px; 
     }
 
     .footer-social-links {
-        margin-top: 0; /* No top margin needed when horizontal */
+        margin-top: 0; 
     }
+}
 
-    
+/* ==================================================================== */
+/* ACCESSIBILITY: KEYBOARD NAVIGATION FOCUS STATES                      */
+/* ==================================================================== */
+
+/* This applies a visible ring ONLY when using a keyboard (Tab key) */
+:focus-visible {
+    outline: 2px solid rgb(0, 153, 255);
+    /* Bright blue matching your theme */
+    outline-offset: 4px;
+    /* Gives the element some breathing room */
+    border-radius: 4px;
+}
+
+/* Specific fix for the logo to make the ring round if preferred, or standard box */
+#logo:focus-visible {
+    outline-offset: 8px;
+}
+
+/* Ensure the hamburger button shows focus clearly */
+.hamburger:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
