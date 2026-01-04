@@ -1,75 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Space Discoveries</title>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <meta name="description" content="Explore the latest space discoveries, new planets, stars, and galaxies with our community of space enthusiasts. Join Space Discoveries today!">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/style/styles.css">
-    <link rel="stylesheet" 
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=recycling">
-        <link rel="preload" as="image" href="./src/images/earthtransparent.drawio.png">
+    <link rel="icon" href="favicon.png" type="image/png" />
+    <meta
+      name="description"
+      content="Explore the latest space discoveries, new planets, stars, and galaxies with our community of space enthusiasts. Join Space Discoveries today!"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/style/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      />
+    </noscript>
+    <link
+      rel="preload"
+      as="image"
+      href="./src/images/earthtransparent.drawio.png"
+    />
+  </head>
 
-</head>
-
-<body>
+  <body>
     <canvas id="starfield-canvas"></canvas>
     <header>
-        <nav id="main-nav">
-            <a href="#hero" id="logo">
-                <span class="material-symbols-outlined">
-                    recycling 
-                </span>
-            </a>
-            <div class="hamburger">&#9776;</div>
-            <ul class="navlinks">
-                <li><a href="./index.html#hero">Home</a></li>
-                <li><a href="./images.html">Images</a></li>
-                <li><a href="./articles.html">Articles</a></li>
-                <li><a href="./myFavorite.html">My Favorite</a></li>
-                <li><a href="./index.html#join">Join</a></li>
-                
-                
-            </ul>
-        </nav>
+      <nav id="main-nav">
+        <a href="index.html#hero" id="logo" aria-label="Space Discoveries Home">
+          <i class="fa-solid fa-recycle"></i>
+        </a>
+        <div class="hamburger">&#9776;</div>
+        <ul class="navlinks">
+          <li><a href="./index.html#hero">Home</a></li>
+          <li><a href="./images.html">Images</a></li>
+          <li><a href="./articles.html">Articles</a></li>
+          <li><a href="./myFavorite.html">My Favorite</a></li>
+          <li><a href="./index.html#join">Join</a></li>
+        </ul>
+      </nav>
     </header>
     <div id="my-favorite-galaxy">
-        <h1>My Favorite Galaxy</h1>
-        <p>Here is my favorite galaxy, the Andromeda Galaxy.</p>
-        <div class="image-card">
-            <a href="./src/images/andromeda.webp" target="_blank"><img src="./src/images/andromeda.webp" alt="Andromeda Galaxy" class="gallery-image"></a>
-            <p>Image Credit: NASA, ESA, and M. Livio and the Hubble Heritage Team (STScI/AURA)</p>
-        </div>
+      <h1>My Favorite Galaxy</h1>
+      <p>Here is my favorite galaxy, the Andromeda Galaxy.</p>
+      <div class="image-card">
+        <a href="./src/images/andromeda.webp" target="_blank"
+          ><img
+            src="./src/images/andromeda.webp"
+            alt="Andromeda Galaxy"
+            class="gallery-image"
+        /></a>
+        <p>
+          Image Credit: NASA, ESA, and M. Livio and the Hubble Heritage Team
+          (STScI/AURA)
+        </p>
+      </div>
     </div>
-    
-   
-<footer>
-    <p>© 2025 Space Discoveries.</p>
-    <div class="footer-social-links">
+
+    <footer>
+      <p>© 2025 Space Discoveries.</p>
+      <div class="footer-social-links">
         <p>Follow my favorite channels:</p>
-        <a href="https://x.com/jameswebb_nasa" rel="noopener noreferrer" target="_blank">
-            <i class="fab fa-x-twitter"></i> NASA James Webb Telescope
+        <a
+          href="https://x.com/jameswebb_nasa"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <i class="fab fa-x-twitter"></i> NASA James Webb Telescope
         </a>
-        <a href="https://x.com/NASASolarSystem" rel="noopener noreferrer" target="_blank">
-            <i class="fab fa-x-twitter"></i> NASA Solar System
+        <a
+          href="https://x.com/NASASolarSystem"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <i class="fab fa-x-twitter"></i> NASA Solar System
         </a>
-        <a href="https://x.com/NASAArtemis" rel="noopener noreferrer" target="_blank">
-            <i class="fab fa-x-twitter"></i> NASA Artemis
+        <a
+          href="https://x.com/NASAArtemis"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          <i class="fab fa-x-twitter"></i> NASA Artemis
         </a>
         <a href="https://nasa.gov" rel="noopener noreferrer" target="_blank">
-            <i class="fa-solid fa-globe"></i> NASA Homepage
+          <i class="fa-solid fa-globe"></i> NASA Homepage
         </a>
-    </div>
-</footer>
+      </div>
+    </footer>
 
     <script src="./src/js/script.js"></script>
-</body>
-
+  </body>
 </html>

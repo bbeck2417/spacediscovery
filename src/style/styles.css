@@ -81,12 +81,27 @@ header {
     }
 }
 
-/* Apply the animation to the specific recycling icon */
-#logo .material-symbols-outlined {
-    animation: rotate 5s linear infinite; /* 2s duration, linear speed, infinite loop */
-    display: inline-block; /* Essential for transform to work correctly */
-}
+/* Apply the animation, size, and spacing fixes to both icons */
+#logo .material-symbols-outlined,
+#logo .fa-recycle,
+#logo .fa-solid {
+    animation: rotate 5s linear infinite;
+    display: inline-block;
 
+    /* UNIFY SIZE & SPACING */
+    font-size: 24px;
+    /* Ensure visual size is identical */
+    line-height: 1;
+    /* Prevents extra vertical spacing */
+    width: 24px;
+    /* Forces a square footprint */
+    height: 24px;
+    /* Forces a square footprint */
+
+    /* Add the margin that the old icon had, so alignment matches */
+    margin-top: 10px;
+    margin-right: auto;
+}
 .hamburger {
     display: block;
     font-size: 30px;
