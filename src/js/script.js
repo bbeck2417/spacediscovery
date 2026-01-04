@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // --- STARFIELD SETUP ---
+  // ==========================================
+  // 1. STARFIELD BACKGROUND
+  // ==========================================
   const canvas = document.getElementById("starfield-canvas");
-  
-  // Guard clause: If canvas doesn't exist (e.g. on other pages), stop here to prevent errors.
-  if (!canvas) return; 
+
+  if (!canvas) return;
 
   const ctx = canvas.getContext("2d");
   let width = window.innerWidth;
@@ -14,8 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const maxZ = 1000;
   const perspectiveFactor = 300;
 
-  // OPTIMIZATION: Handle High-DPI (Retina) Displays for crisp stars
-  // This makes your MacBook M5 screen look sharp instead of blurry
   const dpr = window.devicePixelRatio || 1;
   canvas.width = width * dpr;
   canvas.height = height * dpr;
@@ -28,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   canvas.style.left = "0";
   canvas.style.zIndex = "-1";
   canvas.style.pointerEvents = "none";
-  // CSS Fix in JS: Ensure overflow is hidden to prevent scrollbars
-  canvas.style.overflow = "hidden"; 
+  canvas.style.overflow = "hidden";
 
   function Star() {
     this.x = (Math.random() - 0.5) * width;
@@ -57,7 +55,6 @@ document.addEventListener("DOMContentLoaded", function () {
       y = cy + Math.sin(rot) * outerRadius;
       context.lineTo(x, y);
       rot += step;
-
       x = cx + Math.cos(rot) * innerRadius;
       y = cy + Math.sin(rot) * innerRadius;
       context.lineTo(x, y);
@@ -104,8 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", () => {
     width = window.innerWidth;
     height = window.innerHeight;
-    
-    // Update canvas dimensions with DPR support
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     canvas.style.width = `${width}px`;
@@ -116,18 +111,32 @@ document.addEventListener("DOMContentLoaded", function () {
   initStars();
   drawStars();
 
-  // --- EARTH SCROLL ANIMATION (OPTIMIZED) ---
+  // ==========================================
+  // 2. EARTH SCROLL ANIMATION (RESTORED ORIGINAL)
+  // ==========================================
   const earthImageContainer = document.querySelector(".hero-image-container");
   const earthImage = document.querySelector(".hero-image");
   const heroSection = document.getElementById("hero");
 
   if (earthImageContainer && earthImage && heroSection) {
-    
+    // Cache calculation vars
+    let heroHeight = heroSection.offsetHeight;
+    let heroTop = heroSection.offsetTop;
+    let windowHeight = window.innerHeight;
+
+    window.addEventListener("resize", () => {
+      heroHeight = heroSection.offsetHeight;
+      heroTop = heroSection.offsetTop;
+      windowHeight = window.innerHeight;
+    });
+
     function animateEarth() {
-      const heroRect = heroSection.getBoundingClientRect();
-      const animationStartPoint = window.innerHeight;
-      const animationEndPoint = window.innerHeight * 0.2;
-      const currentHeroBottom = heroRect.bottom;
+      // Logic restored to YOUR original calculations (Bottom of hero leaving screen)
+      const scrollY = window.scrollY;
+
+      const currentHeroBottom = heroTop + heroHeight - scrollY;
+      const animationStartPoint = windowHeight;
+      const animationEndPoint = windowHeight * 0.2;
 
       let scrollProgress =
         (animationStartPoint - currentHeroBottom) /
@@ -135,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       scrollProgress = Math.max(0, Math.min(1, scrollProgress));
 
+      // Just Scale and Opacity. No Parallax TranslateY.
       const scaleValue = 1 - scrollProgress;
       const opacityValue = 1 - scrollProgress;
 
@@ -148,24 +158,28 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // RECRUITER READY FIX: The "Tick" Pattern
-    // Prevents the scroll event from firing too often and blocking the main thread
+    // Keep the "Tick" Pattern to prevent choppiness
     let ticking = false;
-    window.addEventListener("scroll", () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
             animateEarth();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true }); // 'passive: true' tells browser we won't cancel the scroll
+            ticking = false;
+          });
+          ticking = true;
+        }
+      },
+      { passive: true }
+    );
 
-    // Initial call
     animateEarth();
   }
 
-  // --- HAMBURGER MENU ---
+  // ==========================================
+  // 3. HAMBURGER MENU
+  // ==========================================
   const hamburger = document.querySelector(".hamburger");
   const navLinks = document.querySelector(".navlinks");
 
@@ -183,17 +197,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // --- NEWS FETCHING (FIXED) ---
+  // ==========================================
+  // 4. NEWS FETCHING
+  // ==========================================
   const newsContainer = document.getElementById("news-container");
 
   async function fetchNews() {
-    // FIX: Only run if container exists
-    if (!newsContainer) return; 
+    if (!newsContainer) return;
 
     try {
-      // FIX: Path relative to index.html (Root) -> src -> js -> news.json
-      const response = await fetch('./src/js/news.json');
-      
+      const response = await fetch("./src/js/news.json");
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -211,10 +225,9 @@ document.addEventListener("DOMContentLoaded", function () {
       (a, b) => new Date(b.datePublished) - new Date(a.datePublished)
     );
 
-    const recentArticles = sortedArticles.slice(0, 5); // Ensure we only get top 5
+    const recentArticles = sortedArticles.slice(0, 5);
 
-    // Clear loading state
-    newsContainer.innerHTML = '';
+    newsContainer.innerHTML = "";
 
     recentArticles.forEach((article) => {
       const card = document.createElement("div");
@@ -242,81 +255,78 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Start Fetch
   fetchNews();
 
+  // ==========================================
+  // 5. JOIN FORM VALIDATION
+  // ==========================================
+  const joinForm = document.getElementById("join-form");
+  const nameInput = document.getElementById("name");
+  const emailInput = document.getElementById("email");
+  const nameError = document.getElementById("name-error");
+  const emailError = document.getElementById("email-error");
 
-  // --- JOIN FORM LOGIC ---
-  const joinForm = document.getElementById('join-form');
-  const nameInput = document.getElementById('name');
-  const emailInput = document.getElementById('email');
-  const nameError = document.getElementById('name-error');
-  const emailError = document.getElementById('email-error');
-
-  // Guard clause for pages without the form
   if (joinForm && nameInput && emailInput) {
-      
-      function validateName() {
-          if (nameInput.value.trim() === '') {
-              nameError.textContent = 'Name is required.';
-              nameInput.classList.add('invalid');
-              return false;
-          } else {
-              nameError.textContent = '';
-              nameInput.classList.remove('invalid');
-              return true;
-          }
+    function validateName() {
+      if (nameInput.value.trim() === "") {
+        nameError.textContent = "Name is required.";
+        nameInput.classList.add("invalid");
+        return false;
+      } else {
+        nameError.textContent = "";
+        nameInput.classList.remove("invalid");
+        return true;
       }
+    }
 
-      function validateEmail() {
-          const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (emailInput.value.trim() === '') {
-              emailError.textContent = 'Email is required.';
-              emailInput.classList.add('invalid');
-              return false;
-          } else if (!emailPattern.test(emailInput.value.trim())) {
-              emailError.textContent = 'Please enter a valid email address.';
-              emailInput.classList.add('invalid');
-              return false;
-          } else {
-              emailError.textContent = '';
-              emailInput.classList.remove('invalid');
-              return true;
-          }
+    function validateEmail() {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (emailInput.value.trim() === "") {
+        emailError.textContent = "Email is required.";
+        emailInput.classList.add("invalid");
+        return false;
+      } else if (!emailPattern.test(emailInput.value.trim())) {
+        emailError.textContent = "Please enter a valid email address.";
+        emailInput.classList.add("invalid");
+        return false;
+      } else {
+        emailError.textContent = "";
+        emailInput.classList.remove("invalid");
+        return true;
       }
+    }
 
-      joinForm.addEventListener('submit', function(event) {
-          event.preventDefault();
+    joinForm.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-          const isNameValid = validateName();
-          const isEmailValid = validateEmail();
+      const isNameValid = validateName();
+      const isEmailValid = validateEmail();
 
-          if (isNameValid && isEmailValid) {
-              const originalFormHTML = joinForm.innerHTML;
-              const userName = nameInput.value; // Capture before clearing
+      if (isNameValid && isEmailValid) {
+        const originalFormHTML = joinForm.innerHTML;
+        const userName = nameInput.value;
 
-              joinForm.innerHTML = `
-                  <div class="success-message">
-                      <h3>🎉 Thank you ${userName} for joining! 🎉</h3>
-                      <p>We're excited to have you in our Space Discoveries community.</p>
-                      <p>Redirecting you back to the form...</p>
-                  </div>
-              `;
+        joinForm.innerHTML = `
+            <div class="success-message">
+                <h3>🎉 Thank you ${userName} for joining! 🎉</h3>
+                <p>We're excited to have you in our Space Discoveries community.</p>
+                <p>Redirecting you back to the form...</p>
+            </div>
+        `;
 
-              setTimeout(() => {
-                  joinForm.innerHTML = originalFormHTML;
-                  
-                  // Re-query DOM elements because innerHTML destroyed the old ones
-                  const newNameInput = document.getElementById('name');
-                  const newEmailInput = document.getElementById('email');
-                  
-                  if (newNameInput) newNameInput.addEventListener('input', validateName);
-                  if (newEmailInput) newEmailInput.addEventListener('input', validateEmail);
-              }, 8000);
-          }
-      });
+        setTimeout(() => {
+          joinForm.innerHTML = originalFormHTML;
+          const newNameInput = document.getElementById("name");
+          const newEmailInput = document.getElementById("email");
+          if (newNameInput)
+            newNameInput.addEventListener("input", validateName);
+          if (newEmailInput)
+            newEmailInput.addEventListener("input", validateEmail);
+        }, 8000);
+      }
+    });
 
-      nameInput.addEventListener('input', validateName);
-      emailInput.addEventListener('input', validateEmail);
+    nameInput.addEventListener("input", validateName);
+    emailInput.addEventListener("input", validateEmail);
   }
 });

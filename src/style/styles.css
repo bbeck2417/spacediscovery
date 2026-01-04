@@ -1,758 +1,690 @@
 /* ==================================================================== */
 /* BASE STYLES (MOBILE-FIRST)                      */
-/* These are the default styles that apply to all screen sizes,
-   but are specifically tailored for smaller (mobile) screens.
-   Larger screen styles will override these in the media query below. */
 /* ==================================================================== */
 
 /* FIX: Silences Chrome warning about overflow on media elements */
-/* This satisfies the View Transitions API requirements */
-img, video, canvas {
-    overflow: clip;
-    overflow-clip-margin: content-box;
+img,
+video,
+canvas {
+  overflow: clip;
+  overflow-clip-margin: content-box;
 }
 
 html {
-    scroll-behavior: smooth; /* Optional: for smooth scrolling */
-    scroll-padding-top: 117.5px; /* This is crucial for *all* hash links */
+  scroll-behavior: smooth;
+  scroll-padding-top: 117.5px;
 }
-html, body {
-    margin: 0;
-    padding: 0;
-    /* Ensure html and body fill the viewport vertically. */
-    min-height: 100%;
-    height: auto; /* Allow height to adjust to content */
-    overflow-x: hidden; /* Prevents horizontal scrollbar if 100vw causes it */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  height: auto;
+  overflow-x: hidden;
 }
 body {
-    background-color: rgb(10, 0, 28);
-    color: white;
-    font-family: Orbitron, sans-serif;
-    font-size: 16px; /* Good base font size for mobile */
-    font-weight: 500;
-    letter-spacing: 0.5px;
-    line-height: 1.6; /* Improve readability */
-    padding-top: 60px; /* Add padding to account for fixed header on mobile */
-    min-height: 100vh; /* Ensure body takes at least full viewport height */
+  background-color: rgb(10, 0, 28);
+  color: white;
+  font-family: Orbitron, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+  padding-top: 60px;
+  min-height: 100vh;
 }
 
-/* HEADER & NAVIGATION (Mobile-First) */
+/* HEADER & NAVIGATION */
 header {
-    position: fixed; /* Fixed header for mobile */
-    top: 0; /* Stick to the top */
-    left: 0; /* Stick to the left */
-    width: 100%; /* Full width */
-    z-index: 1000; /* Ensure it sits above other content */
-    background-color: rgb(10, 0, 28); /* Dark background for contrast */ 
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);  /* Subtle shadow for depth */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgb(10, 0, 28);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 #main-nav {
-    display: flex;  /* Flexbox for layout */
-    justify-content: flex-end; /* Push hamburger to the right */
-    align-items: center; /* Vertically center hamburger */
-    padding: 10px 20px; /* Padding for the header */
-    height: 40px; /* Consistent height for the header bar */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  height: 40px;
 }
 
-#logo, span {
-    display: flex;
-    margin: 10px auto 0px 10px;
-    text-decoration: none;
-    color: white; /* White text for contrast */
+#logo,
+span {
+  display: flex;
+  margin: 10px auto 0px 10px;
+  text-decoration: none;
+  color: white;
+}
 
-}
-.material-symbols-outlined {
-    display: flex;
-    margin-right: auto;
-    margin-top: 10px;
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
+/* ROTATION ANIMATION */
 @keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
-/* Apply the animation, size, and spacing fixes to both icons */
-#logo .material-symbols-outlined,
-#logo .fa-recycle,
-#logo .fa-solid {
-    animation: rotate 5s linear infinite;
-    display: inline-block;
-
-    /* UNIFY SIZE & SPACING */
-    font-size: 24px;
-    /* Ensure visual size is identical */
-    line-height: 1;
-    /* Prevents extra vertical spacing */
-    width: 24px;
-    /* Forces a square footprint */
-    height: 24px;
-    /* Forces a square footprint */
-
-    /* Add the margin that the old icon had, so alignment matches */
-    margin-top: 10px;
-    margin-right: auto;
+/* LOGO ICON STYLES (Clean FontAwesome) */
+#logo .fa-recycle {
+  animation: rotate 5s linear infinite;
+  display: inline-block;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  margin-top: 10px;
+  margin-right: auto;
 }
+
 .hamburger {
-    display: block;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    z-index: 1001;
-    padding: 5px;
-
-    /* ADD THESE LINES TO RESET BUTTON STYLES */
-    background: none;
-    border: none;
-    outline: none;
-    /* We will add a custom focus ring below */
+  display: block;
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
+  background: none;
+  border: none;
+  outline: none;
 }
 
 .navlinks {
-    display: none; /* Hidden by default on mobile */
-    position: absolute; /* Takes it out of the flow */
-    top: 40px; /* Position just below the header */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width for mobile */
-    background-color: rgba(10, 0, 28, .8); /* Dark background for contrast */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7); /* Shadow for depth */
-    z-index: 999; /* Ensure it sits above other content */
-
-    flex-direction: column; /* Stack links vertically */
-    padding: 20px 0; /* Padding for links */
-    max-height: calc(100vh - 60px); /* Full height minus header */
-    overflow-y: auto; /* Scrollable if content exceeds viewport height */
+  display: none;
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 100%;
+  background-color: rgba(10, 0, 28, 0.8);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  flex-direction: column;
+  padding: 20px 0;
+  max-height: calc(100vh - 60px);
+  overflow-y: auto;
 }
 
 .navlinks.active {
-    display: flex; /* Show navlinks when active */
+  display: flex;
 }
 
 .navlinks li {
-    list-style: none; /* Remove default list styles */
-    text-align: center; /* Center align links */
-    
+  list-style: none;
+  text-align: center;
 }
 .navlinks a {
-    display: block; /* Block display for full width */
-    padding: 15px 0; /* Padding for links */
-    color: white; /* White text for contrast */
-    text-decoration: none; /* Remove underline */
-    transition: background-color 0.3s ease; /* Smooth background transition */
+  display: block;
+  padding: 15px 0;
+  color: white;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 .navlinks a:hover,
 .navlinks a.active {
-    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover or active link */
-    border-radius: 0; /* No border-radius for mobile links */
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0;
 }
 
-/* HERO SECTION (Mobile-First) */
+/* HERO SECTION */
 #hero {
-    position: relative; /* Relative for absolute positioning of image */
-    display: flex; /* Flexbox for layout */
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically for mobile */
-    height: 100vh; /* Keep 100vh for hero on mobile too if desired */
-    text-align: center; /* Center text */
-    padding: 20px; /* Padding for hero section */
-    box-sizing: border-box;  /* Include padding in height/width calculations */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /* Push content to the top so H1 is always visible at the top */
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  /* Add padding to push H1 down from the fixed header */
+  padding-top: 120px;
+  box-sizing: border-box;
+  overflow: hidden; /* Crucial: cuts off the bottom half of the earth */
 }
 
+/* Text Styling */
 #hero h1 {
-    margin-top: 0; /* No fixed margin-top for mobile - centered by flex */
-    font-size: 2.5em; /* Smaller for mobile */
-    color: white; /* White text for contrast */
-    margin-bottom: 10px; /* Space below heading */
-    position: relative; /* Position relative for animation */
-    z-index: 10; /* Ensure it sits above the image */
-    animation: zoomInLoad 1.5s ease-out forwards; /* Animation for loading effect */
-    opacity: 0; /* Start invisible for animation */
-    transform: scale(0.1); /* Start scaled down for animation */
+  margin-top: 0;
+  font-size: 2.5em; /* Mobile size */
+  color: white;
+  margin-bottom: 10px;
+  position: relative;
+  /* Z-INDEX 10: Ensures text stays ON TOP of the earth as it shrinks */
+  z-index: 10;
+  animation: zoomInLoad 1.5s ease-out forwards;
+  opacity: 0;
+  transform: scale(0.1);
 }
+
 #hero h2 {
-    font-size: 1.2em; /* Smaller subheading for mobile */
-    margin-bottom: 20px; /* Space below subheading */
-    position: relative; /* Position relative for animation */
-    margin-top: 50vh;; /* Center vertically in hero section */
-  
+  font-size: 1.2em;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
+  /* Removed the large margin-top so it sits right under H1 */
 }
+
 #hero p {
-    font-size: 1.5em; /* Smaller paragraph text for mobile */
-    margin-bottom: 20px; /* Space below paragraph */
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 10;
 }
 
+/* THE EARTH CONTAINER */
 .hero-image-container {
-    position: absolute; /* Absolute to position relative to hero section */
-    bottom: 50px; /* Position image at the bottom of hero section */
-    left: 0; /* Align to the left */
-    width: 100%; /* Full width for mobile */
-    height: 70vw; /* Responsive height for mobile image */
-    z-index: 1; /* Ensure it sits below text but above background */
+  position: absolute;
+  /* Position it right underneath the text area */
+  top: 350px;
+  /* Center horizontally */
+  left: 50%;
+  transform: translateX(-50%);
+
+  /* "Just under the entire viewport width" */
+  width: 90vw;
+
+  /* Make it tall enough to hang off the bottom of the screen */
+  height: 80vh;
+
+  /* Z-INDEX 1: Puts it BEHIND the text */
+  z-index: 1;
+
+  /* Flex centers the image inside this container */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligns image to top of container */
 }
 
+/* THE EARTH IMAGE */
 .hero-image {
-    display: block; /* Block display for image */
-    width: 100%; /* Image fills container's width */
-    height: 100%; /* Image fills container's height */
-    object-fit: cover; /* Cover the container while maintaining aspect ratio */
-    object-position: top; /* Position image at the top */
-    /* REMOVED: overflow-y: visible; (Caused deprecation warning) */
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  /* CONTAIN: Keeps the curve of the earth perfect */
+  object-fit: contain;
+
+  /* TOP: Ensures the top of the earth touches the top of the container (under text) */
+  object-position: top;
+
+  /* Hardware acceleration for smooth scrolling */
+  will-change: transform, opacity;
+  /* Note: The JS adds the scale() transform, this is just for performance */
+  backface-visibility: hidden;
 }
 
+/* ... (Keep your Table, Section, Join, News, Footer styles exactly as they were) ... */
 #welcome-table {
-    width: 100%; /* Full width for mobile */
-    max-width: 600px; /* Limit max width for readability */
-    margin: 20px auto; /* Center table with margin */
-    border-collapse: collapse; /* Collapse borders for cleaner look */
-    display: table; /* Ensure it behaves like a table */
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  border-collapse: collapse;
+  display: table;
 }
-
 #welcome-table td,
 #welcome-table th {
-    border: 2px solid #ccc; /* Light border for table cells */
-    padding: 10px; /* Padding for table cells */
-    text-align: center; /* Center align text in table cells */
-    font-size: 1.1em; /* Slightly larger font for table cells */
+  border: 2px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.1em;
 }
-
 #welcome-table a {
-    color: white;
-    font-size: 1.1em;
-    text-align: center;
-    background-color: rgb(0, 86, 179);
-    text-decoration: none;
-    transition: background-color 0.3s;
-    padding: 10px 20px;
-    border-width: initial;
-    border-style: none;
-    border-color: initial;
-    border-image: initial;
-    border-radius: 5px;
+  color: white;
+  font-size: 1.1em;
+  text-align: center;
+  background-color: rgb(0, 86, 179);
+  text-decoration: none;
+  transition: background-color 0.3s;
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 #welcome-table a:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-/* CONTENT SECTIONS (Mobile-First) */
 section {
-    padding: 60px 20px; /* Padding for mobile sections */
-    min-height: 50vh; /* Allow content sections to be shorter on mobile */
-    display: flex;  /* Flexbox for layout */
-    flex-direction: column;  /* Stack content vertically */
-    align-items: center; /* Center content horizontally */
-    text-align: center; /* Center text */
-    justify-content: center; /* Center content vertically */
-    box-sizing: content-box; /* Ensure padding doesn't affect height */
+  padding: 60px 20px;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  box-sizing: content-box;
 }
 
-section h1, section h2 {
-    font-size: 2em; /* Smaller headings for mobile */
-    margin-bottom: 20px; /* Space below headings */
+section h1,
+section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
 }
 section p {
-    max-width: 600px; /* Limit paragraph width for readability */
-    margin-bottom: 15px; /* Space below paragraphs */
+  max-width: 600px;
+  margin-bottom: 15px;
 }
-section ul { 
-    list-style: none; /* Remove default list styles */
-    padding: 0; /* Remove padding */
-    text-align: center; /* Center align list items */
+section ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
 }
 section li {
-    margin-bottom: 10px; /* Space between list items */
-    font-size: 1.1em; /* Slightly larger font for list items */
+  margin-bottom: 10px;
+  font-size: 1.1em;
 }
 
-/* Style for links in sections */
 #articles-link {
-    margin: 20px 0; /* Space above and below the link */  
-    display: flex; /* Flexbox for layout */
-    flex-direction: column; /* Stack text vertically */
-    align-items: center; /* Center align text */    
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-#articles-link p, #articles-link a h2 {
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s ease; /* Smooth hover effect */
-    font-size: 1.2em; /* Slightly larger font for emphasis */
-    margin: 0; /* Remove default margins */
-    padding: 10px; /* Padding for better tap area */
-    text-align: center; /* Center align text */
+#articles-link p,
+#articles-link a h2 {
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1.2em;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+}
+#read-more {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  background-color: rgb(0, 86, 179);
+  padding: 10px 20px;
+  border-radius: 5px;
 }
 
-#read-more  {
-    text-decoration: none;
-    color:  white;
-    font-size: 1.1em; /* Slightly larger font for emphasis */
-    transition: background-color 0.3s ease; /* Smooth hover effect */
-    text-align: center; /* Center align text */
-    background-color: rgb(0, 86, 179);
-    padding: 10px 20px; /* Padding for better tap area */
-    border: none; /* No border for button */
-    border-radius: 5px; /* Rounded corners for button */
-}
-  
-/* JOIN SECTION (Mobile-First) */
 #join form {
-    display: flex;  /* Flexbox for layout */
-    flex-direction: column; /* Stack form elements vertically */
-    width: 90%; /* Full width for mobile */
-    max-width: 400px; /* Limit max width for readability */
-    margin-top: 20px; /* Space above form */
-    padding: 20px; /* Padding for form */
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background for form */
-    border-radius: 8px; /* Rounded corners for form */
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 400px;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 8px;
 }
-
 #join label {
-    margin-bottom: 5px; /* Space below labels */
-    font-size: 1.1em; /* Slightly larger font for labels */
-    text-align: left; /* Align labels to the left */
+  margin-bottom: 5px;
+  font-size: 1.1em;
+  text-align: left;
 }
-
 #join input[type="text"],
 #join input[type="email"] {
-    width: 100%; /* Full width for inputs */
-    padding: 10px; /* Padding for inputs */
-    margin-bottom: 15px; /* Space below inputs */
-    border: 1px solid #555; /* Dark border for inputs */
-    background-color: #333; /* Dark background for inputs */
-    color: white; /* White text for contrast */
-    border-radius: 5px; /* Rounded corners for inputs */
-    font-size: 1em; /* Base font size for inputs */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #555;
+  background-color: #333;
+  color: white;
+  border-radius: 5px;
+  font-size: 1em;
 }
-
 #join button {
-    padding: 12px 20px; /* Padding for button */
-    background-color: rgb(0, 86, 179); /* Button background color */
-    color: white; /* White text for contrast */
-    border: none; /* No border for button */
-    border-radius: 5px; /* Rounded corners for button */
-    cursor: pointer; /* Pointer cursor for interactivity */
-    font-size: 1.1em; /* Slightly larger font for button */
-    transition: background-color 0.3s ease; /* Smooth background transition */
+  padding: 12px 20px;
+  background-color: rgb(0, 86, 179);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
 }
-
 #join button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3;
 }
-
 .error-message {
-    color: #ff4d4d; /* Bright red color for errors */
-    font-size: 0.85em; /* Slightly smaller font size */
-    margin-top: -10px; /* Pull it up closer to the input */
-    margin-bottom: 10px; /* Space below the error message */
-    display: block; /* Ensure it takes its own line */
-    text-align: left; /* Align text to the left */
+  color: #ff4d4d;
+  font-size: 0.85em;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  display: block;
+  text-align: left;
 }
-
-/* Style for invalid input fields */
 #join input.invalid {
-    border-color: #ff4d4d; /* Red border for invalid input */
-    box-shadow: 0 0 5px rgba(255, 77, 77, 0.5); /* Subtle red glow */
+  border-color: #ff4d4d;
+  box-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
 }
 
 #my-favorite-galaxy {
-    display: flex; /* Flexbox for layout */
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center content horizontally */
-    justify-content: center; /* Center content vertically */
-    padding: 15vh 20px; /* Padding for my favorite galaxy section */
-    text-align: center; /* Center align text */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15vh 20px;
+  text-align: center;
 }
 
-/* Animations */
 @keyframes zoomInLoad {
-    0% {    
-        opacity: 0; /* Start invisible */
-        transform: scale(0.1); /* Start scaled down */
-    }
-    100% {
-        opacity: 1; /* Fully visible */
-        transform: scale(1); /* Scale to normal size */
-    }
+  0% {
+    opacity: 0;
+    transform: scale(0.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-/* News and Articles Section */
 #latest-discoveries {
-    padding: 15vh 0px 20px; /* Padding for latest discoveries section */
-    text-align: center; /* Center align text */
+  padding: 15vh 0px 20px;
+  text-align: center;
 }
 #news-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.news-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+.news-card:hover {
+  transform: translateY(-5px);
+}
+.news-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.card-content {
+  padding: 15px;
+}
+.card-content h2 {
+  font-size: 1.5em;
+  margin-top: 0;
+  color: #333;
+}
+.card-content p {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 10px;
+}
+.card-content .author-date {
+  font-size: 0.8em;
+  color: #999;
+}
+
+.full-article-container {
+  max-width: 800px;
+  margin: 15vh auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.full-article-container img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 4px;
+}
+.full-article-container h1 {
+  font-size: 2.2em;
+  color: #333;
+  margin-bottom: 10px;
+}
+.full-article-container .author-date {
+  font-size: 0.9em;
+  color: #777;
+  margin-bottom: 20px;
+  display: block;
+}
+.full-article-container p {
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 15px;
+}
+.articleBackButton {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+.articleBackButton button {
+  background-color: rgb(0, 86, 179);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+footer {
+  background-color: rgb(10, 0, 28);
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+footer p {
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+.footer-social-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+.footer-social-links p {
+  font-size: 1em;
+  margin-right: 10px;
+  white-space: nowrap;
+}
+.footer-social-links a {
+  color: rgb(0, 153, 255);
+  text-decoration: none;
+  font-size: 0.95em;
+  transition: color 0.3s ease;
+  padding: 5px 8px;
+  border-radius: 4px;
+}
+.footer-social-links a:hover {
+  color: rgb(77, 195, 255);
+  text-decoration: underline;
+}
+.footer-social-links a i {
+  margin-right: 5px;
+  font-size: 1.1em;
+  vertical-align: middle;
+}
+.footer-social-links a:hover i {
+  color: inherit;
+}
+
+#images-page-layout {
+  padding: 15vh 20px;
+  text-align: center;
+}
+.image-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+.image-card {
+  background-color: #000;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+.image-card img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+.gallery-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+@media only screen and (max-width: 932px) and (orientation: landscape) {
+  #main-nav {
+    height: 45px;
+    padding: 5px 15px;
+  }
+  .hamburger {
+    font-size: 24px;
+    padding: 3px;
+  }
+  #logo {
+    margin: 5px auto 0px 5px;
+  }
+  .navlinks {
+    top: 45px;
+    max-height: calc(100vh - 45px);
+    padding: 10px 0;
+  }
+  .navlinks a {
+    padding: 10px 0;
+    font-size: 0.9em;
+  }
+  body {
+    padding-top: 45px;
+  }
+}
+
+@media (min-width: 932px) {
+  body {
+    padding-top: 0;
+  }
+  #main-nav {
+    justify-content: flex-end;
+    height: auto;
+  }
+  .hamburger {
+    display: none;
+  }
+  .navlinks {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    background-color: rgba(10, 0, 28, 0.8);
+    box-shadow: none;
+    z-index: auto;
+    padding: 10px 0;
+    max-height: none;
+    overflow-y: visible;
+    border-radius: 8px;
+  }
+  .navlinks a {
+    padding: 10px 15px;
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  /* HERO DESKTOP OVERRIDES */
+  #hero {
+    /* Keep flex-start to keep H1 at top */
+    justify-content: flex-start;
+    padding-top: 15vh; /* More space on desktop */
+    padding-bottom: 0;
+  }
+
+  #hero h1 {
+    /* Remove the old margin-top: 30vh override */
+    margin-top: 0;
+    font-size: 4em;
+    margin-bottom: 20px;
+  }
+
+  /* Adjust Earth position for Desktop */
+  .hero-image-container {
+    top: 35vh; /* Push it down a bit more to clear the larger text */
+    width: 60vw; /* Don't let it be TOO wide on huge screens */
+    height: 100vh;
+  }
+
+  .image-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 20px;
     max-width: 1200px;
     margin: 0 auto;
-}
-
-.news-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-}
-
-.news-card:hover {
-    transform: translateY(-5px);
-}
-
-.news-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.card-content {
-    padding: 15px;
-}
-
-.card-content h2 {
-    font-size: 1.5em;
-    margin-top: 0;
-    color: #333;
-}
-
-.card-content p {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 10px;
-}
-
-.card-content .author-date {
-    font-size: 0.8em;
-    color: #999;
-}
-
-/* Full article page styles */
-.full-article-container {
-    max-width: 800px;
-    margin: 15vh auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.full-article-container img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 4px;
-}
-
-.full-article-container h1 {
-    font-size: 2.2em;
-    color: #333;
-    margin-bottom: 10px;
-}
-
-.full-article-container .author-date {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 20px;
+  }
+  .image-card {
+    text-align: left;
+    max-width: none;
+  }
+  .image-card img {
     display: block;
+    margin: 0;
+  }
+  section {
+    padding: 20px 40px;
+    min-height: 10vh;
+  }
+  section h1 {
+    font-size: 3.5em;
+  }
+  section h2 {
+    font-size: 3em;
+  }
+  section p,
+  section li {
+    font-size: 1.5em;
+  }
+  #join form {
+    width: 60%;
+    max-width: 600px;
+  }
+  footer {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 30px 40px;
+  }
+  .footer-social-links {
+    margin-top: 0;
+  }
 }
 
-.full-article-container p {
-    line-height: 1.6;
-    color: #444;
-    margin-bottom: 15px;
-}
-
-.articleBackButton {
-    display: flex;
-    justify-content: center; /* Center the button */
-    margin-top: 20px; /* Space above the button */
-}
-.articleBackButton button {
-    background-color: rgb(0, 86, 179);
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-}
-
-/* ==================================================================== */
-/* FOOTER STYLES */
-/* ==================================================================== */
-footer {
-    background-color: rgb(10, 0, 28); /* Dark background matching your header/body */
-    color: white;
-    padding: 30px 20px; /* Generous padding top/bottom, 20px side padding */
-    text-align: center; /* Center text by default */
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle top border */
-    display: flex; /* Use flexbox for main footer content */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally within the footer */
-    gap: 15px; /* Space between flex items */
-}
-
-footer p {
-    margin: 0; /* Remove default paragraph margins */
-    font-size: 0.9em; /* Slightly smaller font for copyright */
-    line-height: 1.5;
-}
-
-.footer-social-links {
-    display: flex; /* Make this container a flex container */
-    flex-wrap: wrap; /* Allow links to wrap to the next line on smaller screens */
-    justify-content: center; /* Center the links horizontally */
-    align-items: center; /* Vertically align items */
-    gap: 5px; /* Space between links */
-    margin-top: 5px; /* Add some space above the social links section */
-}
-
-.footer-social-links p {
-    font-size: 1em; /* Adjust font size for the "Follow" text */
-    margin-right: 10px; /* Space between "Follow" text and the first link */
-    white-space: nowrap; /* Prevent wrapping */
-}
-
-.footer-social-links a {
-    color: rgb(0, 153, 255); /* A lighter blue for links for better visibility */
-    text-decoration: none; /* Remove underline */
-    font-size: 0.95em; /* Slightly adjust link font size */
-    transition: color 0.3s ease; /* Smooth hover effect */
-    padding: 5px 8px; /* Add some padding to make links easier to click */
-    border-radius: 4px; /* Slightly rounded corners for links */
-}
-
-.footer-social-links a:hover {
-    color: rgb(77, 195, 255); /* Lighter blue on hover */
-    text-decoration: underline; /* Add underline on hover for clarity */
-}
-.footer-social-links a i {
-    margin-right: 5px; /* Space between the icon and the text */
-    font-size: 1.1em; /* Slightly larger icon */
-    vertical-align: middle; /* Align icon vertically with text */
-}
-
-.footer-social-links a:hover i {
-    color: inherit; /* Inherit the hover color from the parent link */
-}
-
-#images-page-layout {
-    padding: 15vh 20px; /* Added horizontal padding for mobile */
-    text-align: center; /* Center align text */
-}
-
-.image-gallery {
-    display: flex; /* Use flexbox for mobile */
-    flex-direction: column; /* Stack items vertically */
-    align-items: center; /* Center items horizontally within the flex container */
-    gap: 20px;
-    max-width: 500px; /* Keep max-width to constrain the gallery */
-    margin: 0 auto; /* This centers the gallery container itself */
-}
-
-.image-card {
-    background-color: #000;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
-    width: 100%; /* Ensure card takes full width available */
-    max-width: 300px; /* Constrain individual card width */
-    text-align: center; /* Center content within the card */
-}
-
-.image-card img {
-    display: block; /* Make the image a block element */
-    max-width: 100%; /* Ensure image doesn't overflow its container */
-    height: auto; /* Maintain aspect ratio */
-    margin: 0 auto; /* Crucial for centering the image */
-    border-radius: 8px; /* Rounded corners for images */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-}
-
-.gallery-image { 
-    width: 100%;
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 8px; /* Rounded corners for images */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: transform 0.2s ease-in-out; /* Smooth hover effect */
-}
-
-/* --- */
-/* MOBILE LANDSCAPE STYLES */
-/* --- */
-@media only screen and (max-width: 932px) and (orientation: landscape) {
-
-    #main-nav {
-        height: 45px;
-        padding: 5px 15px;
-    }
-
-    .hamburger {
-        font-size: 24px;
-        padding: 3px;
-    }
-
-    #logo {
-        margin: 5px auto 0px 5px;
-    }
-    #logo .material-symbols-outlined {
-        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
-    }
-
-    .navlinks {
-        top: 45px;
-        max-height: calc(100vh - 45px);
-        padding: 10px 0;
-    }
-
-    .navlinks a {
-        padding: 10px 0;
-        font-size: 0.9em;
-    }
-
-    body {
-        padding-top: 45px;
-    }
-}
-
-/* ==================================================================== */
-/* DESKTOP STYLES (MEDIA QUERIES)        */
-/* ==================================================================== */
-
-@media (min-width: 932px) {
-    body {
-        padding-top: 0;
-    }
-
-    /* HEADER & NAVIGATION (Desktop Overrides) */
-    #main-nav {
-        justify-content: flex-end; 
-        height: auto;
-    }
-
-    .hamburger {
-        display: none; 
-    }
-
-    .navlinks {
-        position: static; 
-        display: flex; 
-        flex-direction: row; 
-        width: auto; 
-        background-color: rgba(10, 0, 28, .8); 
-        box-shadow: none; 
-        z-index: auto; 
-        padding: 10px 0; 
-        max-height: none; 
-        overflow-y: visible; 
-        border-radius: 8px; 
-    }
-    .navlinks a {
-        padding: 10px 15px;
-        border-radius: 8px; 
-        display: inline-block; 
-    }
-
-    /* HERO SECTION (Desktop Overrides) */
-    #hero {
-        justify-content: space-between; 
-        padding-bottom: 0; 
-    }
-
-    #hero h1 {
-        margin-top: 30vh; 
-        font-size: 4em; 
-        margin-bottom: 20px; 
-    }
-
-    .hero-image-container {
-        height: 300px;
-    }
-     .image-gallery {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
-        max-width: 1200px; 
-        margin: 0 auto; 
-    }
-
-    .image-card {
-        text-align: left; 
-        max-width: none; 
-    }
-
-    .image-card img {
-        display: block; 
-        margin: 0; 
-    }
-
-    /* CONTENT SECTIONS (Desktop Overrides) */
-    section {
-        padding: 20px 40px; 
-        min-height: 10vh; 
-    }
-
-    section h1 {
-        font-size: 3.5em; 
-    }
-    
-    section h2 {
-        font-size: 3em; 
-    }
-    section p, section li {
-        font-size: 1.5em; 
-    }
-
-    /* JOIN SECTION (Desktop Overrides) */
-    #join form {
-        width: 60%; 
-        max-width: 600px; 
-    }
- 
-    footer {
-        flex-direction: row; 
-        justify-content: space-between; 
-        padding: 30px 40px; 
-    }
-
-    .footer-social-links {
-        margin-top: 0; 
-    }
-}
-
-/* ==================================================================== */
-/* ACCESSIBILITY: KEYBOARD NAVIGATION FOCUS STATES                      */
-/* ==================================================================== */
-
-/* This applies a visible ring ONLY when using a keyboard (Tab key) */
 :focus-visible {
-    outline: 2px solid rgb(0, 153, 255);
-    /* Bright blue matching your theme */
-    outline-offset: 4px;
-    /* Gives the element some breathing room */
-    border-radius: 4px;
+  outline: 2px solid rgb(0, 153, 255);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
-
-/* Specific fix for the logo to make the ring round if preferred, or standard box */
 #logo:focus-visible {
-    outline-offset: 8px;
+  outline-offset: 8px;
 }
-
-/* Ensure the hamburger button shows focus clearly */
 .hamburger:focus-visible {
-    outline: 2px solid white;
-    outline-offset: 2px;
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
